@@ -12,4 +12,9 @@ body {
 :root {
   --solid-button: #8338EC;
   --hover-button: #B588F4;
+  --light-border: #DEE2E6;
+  --yellow:#F7BC30;
+  --orange:#FB5607;
+  --pink:#FF006E;
+  --blue:#3A86FF;
 }
