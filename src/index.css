@@ -6,7 +6,10 @@
   font-weight: normal;
   font-style: normal;
 }
-
 body {
   font-family: "firaGO";
+}
+:root {
+  --solid-button: #8338EC;
+  --hover-button: #B588F4;
 }
