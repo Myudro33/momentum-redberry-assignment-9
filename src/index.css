@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "firaGO";
-  src: url("./fonts/FiraGO-Book.otf") format("opentype");
+  src: url("../fonts/FiraGO-Book.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
