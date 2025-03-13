@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getStatuses from "../services/getStatuses";
+import getStatuses from "../api/getStatuses";
 import {getStatusBackgroundColor} from "../services/getColors";
 import TheTaskWrapper from "./TheTaskWrapper";
 

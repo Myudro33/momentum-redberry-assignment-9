@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getTasks from "../services/getTasks";
+import getTasks from "../api/getTasks";
 import TheTaskCard from "./TheTaskCard";
 
 const TheTaskWrapper = () => {
