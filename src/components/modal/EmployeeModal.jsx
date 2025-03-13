@@ -4,50 +4,95 @@ import TheInput from "../TheInput";
 import FileUploadInput from "../FileUploadInput";
 import TheSelect from "../TheSelect";
 import TheButton from "../TheButton";
-import getDepartments from "../../services/getDepartments";
+import getDepartments from "../../api/getDepartments";
+import { Formik, Form } from "formik";
+import {
+  employeeValidation,
+  employeeInitialSchema,
+} from "../../utils/formValidations";
 
 const EmployeeModal = ({ setModal }) => {
   const [image, setImage] = useState(null);
   const [departments, setDepartments] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     const getData = async () => {
-        try {
-          const departments = await getDepartments();
-          setDepartments(departments);
-        } catch (error) {
-          console.error("Failed to fetch data:", error);
-        }
-      };
-      getData();
-  },[])
+      try {
+        const departments = await getDepartments();
+        setDepartments(departments);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    };
+    getData();
+  }, []);
   return (
-    <div className="w-[57.063rem] h-[47.875rem] rounded-xl bg-white shadow-xs flex flex-col pt-10 pb-14 px-12">
-      <div className="w-full flex justify-end">
-        <img
-          onClick={() => setModal(null)}
-          className="cursor-pointer"
-          src={closeIcon}
-          alt="closeicon"
-        />
-      </div>
-      <h1 className="text-center text-[2rem] mt-5 font-semibold">
-        თანამშრომლის დამატება
-      </h1>
-      <div className="mt-8 w-full">
-        <div className="flex justify-between">
-          <TheInput label="სახელი" />
-          <TheInput label="გვარი" />
+    <Formik
+      initialValues={employeeInitialSchema}
+      validationSchema={employeeValidation}
+      onSubmit={(values) => console.log("Uploaded File:", values)}
+    >
+      {({ values, setFieldValue, errors,handleSubmit,handleBlur,handleChange }) => (
+        <div className="w-[57.063rem] h-[47.875rem] rounded-xl bg-white shadow-xs flex flex-col pt-10 pb-14 px-12">
+          <div className="w-full flex justify-end">
+            <img
+              onClick={() => setModal(null)}
+              className="cursor-pointer"
+              src={closeIcon}
+              alt="closeicon"
+            />
+          </div>
+          <h1 className="text-center text-[2rem] mt-5 font-semibold">
+            თანამშრომლის დამატება
+          </h1>
+          <Form onSubmit={handleSubmit}>
+            <div className="mt-8 w-full">
+              <div className="flex justify-between">
+                <TheInput
+                  name="firstName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.firstName}
+                  label="სახელი"
+                />
+                <TheInput
+                  name="lastName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.lastName}
+                  label="გვარი"
+                />
+              </div>
+              <FileUploadInput
+                name="avatar"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                setFieldValue={setFieldValue}
+                value={values.avatar}
+                image={image}
+                setImage={setImage}
+                error={errors.avatar}
+                
+              />
+            </div>
+            <TheSelect
+              name="department_id"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.department_id}
+              data={departments}
+              style="3rem"
+              label="დეპარტამენტი"
+            />
+            <div className="flex justify-end mt-20">
+              <div className="w-[24rem] flex justify-between">
+                <TheButton onClick={() => setModal(null)} text="გაუქმება" />
+                <TheButton type="submit" solid text="დაამატე თანამშრომელი" />
+              </div>
+            </div>
+          </Form>
         </div>
-        <FileUploadInput image={image} setImage={setImage} />
-      </div>
-      <TheSelect data={departments} style="3rem" label="დეპარტამენტი" />
-      <div className="flex justify-end mt-20">
-        <div className="w-[24rem] flex justify-between">
-          <TheButton onClick={() => setModal(null)} text="გაუქმება" />
-          <TheButton solid text="დაამატე თანამშრომელი" />
-        </div>
-      </div>
-    </div>
+      )}
+    </Formik>
   );
 };
 

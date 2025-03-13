@@ -2,28 +2,30 @@ import React, { useRef, useState } from "react";
 import gallery from "../assets/gallery.png";
 import trashIcon from "../assets/trash-icon.png";
 
-const ProfilePhotoSelector = ({ image, setImage }) => {
+const ProfilePhotoSelector = (props) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setImage(file);
+      props.setImage(file);
+      props.setFieldValue('avatar',file)
     }
     const preview = URL.createObjectURL(file);
     setPreviewUrl(preview);
   };
   const handleRemoveImage = () => {
-    setImage(null);
+    props.setImage(null);
     setPreviewUrl(null);
+    props.setFieldValue('avatar',null)
   };
 
   const onChooseFile = () => {
     inputRef.current.click();
   };
   return (
-    <div className="mt-10">
+    <div className="mt-10 h-[8rem]">
     <label className="font-semibold text-sm">ავატარი *</label>
     <div className="flex h-[7.5rem] items-center  justify-center  rounded-lg border border-[color:var(--border-color)] border-dotted">
       <input
@@ -33,7 +35,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         onChange={handleImageChange}
         className="hidden"
       />
-      {!image ? (
+      {!props.image ? (
         <div
           onClick={onChooseFile}
           className="w-full h-full  flex items-center justify-center  relative"
@@ -58,11 +60,12 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
             type="button"
             onClick={handleRemoveImage}
           >
-            <img src={trashIcon} alt="trashicon" />
+            <img className="cursor-pointer" src={trashIcon} alt="trashicon" />
           </button>
         </div>
       )}
     </div>
+    <p className="text-red-500">{props.error}</p>
     </div>
   );
 };
