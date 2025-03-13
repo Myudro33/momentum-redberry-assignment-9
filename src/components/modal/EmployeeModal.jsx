@@ -10,6 +10,7 @@ import {
   employeeValidation,
   employeeInitialSchema,
 } from "../../utils/formValidations";
+import addEmployee from "../../api/addEmployee";
 
 const EmployeeModal = ({ setModal }) => {
   const [image, setImage] = useState(null);
@@ -29,7 +30,10 @@ const EmployeeModal = ({ setModal }) => {
     <Formik
       initialValues={employeeInitialSchema}
       validationSchema={employeeValidation}
-      onSubmit={(values) => console.log("Uploaded File:", values)}
+      onSubmit={(values) => {
+        addEmployee(values)
+        setModal(null)
+      }}
     >
       {({ values, setFieldValue, errors,handleSubmit,handleBlur,handleChange }) => (
         <div className="w-[57.063rem] h-[47.875rem] rounded-xl bg-white shadow-xs flex flex-col pt-10 pb-14 px-12">
