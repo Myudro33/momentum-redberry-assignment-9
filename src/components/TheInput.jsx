@@ -3,7 +3,7 @@ import { ErrorMessage } from "formik";
 
 const TheInput = (props) => {
   return (
-    <div className="flex w-[22rem] h-20  flex-col">
+    <div style={{width:props.width||'22rem'}} className="flex  h-20  flex-col">
       <label className="font-semibold text-sm">{props.label} *</label>
       <input
         name={props.name}
