@@ -4,7 +4,7 @@ import TheInput from "../TheInput";
 import FileUploadInput from "../FileUploadInput";
 import TheSelect from "../TheSelect";
 import TheButton from "../TheButton";
-import getDepartments from "../../api/getDepartments";
+import axios from '../../services/axiosService'
 import { Formik, Form } from "formik";
 import {
   employeeValidation,
@@ -18,7 +18,7 @@ const EmployeeModal = ({ setModal }) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const departments = await getDepartments();
+        const departments = await axios({endpoint:'/departments',method:'GET'});
         setDepartments(departments);
       } catch (error) {
         console.error("Failed to fetch data:", error);

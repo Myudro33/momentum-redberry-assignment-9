@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getTasks from "../api/getTasks";
+import axios from '../services/axiosService'
 import TheTaskCard from "./TheTaskCard";
 
 const TheTaskWrapper = () => {
@@ -12,7 +12,7 @@ const TheTaskWrapper = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const tasks = await getTasks();
+        const tasks = await axios({endpoint:'/tasks',method:'GET'});
         setPriority1Tasks(tasks.filter((task) => task.status.id === 1));
         setPriority2Tasks(tasks.filter((task) => task.status.id === 2));
         setPriority3Tasks(tasks.filter((task) => task.status.id === 3));
