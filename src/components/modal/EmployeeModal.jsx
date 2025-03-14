@@ -49,7 +49,7 @@ const EmployeeModal = ({ setModal }) => {
             თანამშრომლის დამატება
           </h1>
           <Form onSubmit={handleSubmit}>
-            <div className="mt-8 w-full">
+            <div className="mt-8 w-full mb-12">
               <div className="flex justify-between">
                 <TheInput
                   name="firstName"

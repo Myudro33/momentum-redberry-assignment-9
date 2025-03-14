@@ -19,3 +19,24 @@ body {
   --blue:#3A86FF;
   --border-color:#CED4DA;
 }
+.dropdown-menu {
+  position: absolute;
+  list-style: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: none;
+  z-index: 10;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px;
+  cursor: pointer;
+}

@@ -35,7 +35,7 @@ const taksValidation = Yup.object({
     employee_id:Yup.string().required('სავალდებულო'),
     due_date:Yup.date().required('სავალდებულო')
     .typeError("არასწორი ფორმატი") 
-    .min(addDays(startOfDay(new Date()), 1),'მიუთითეთ თარიღი მომავლიდან :)')
+    .min(addDays(startOfDay(new Date()), 1),'მიუთითეთ თარიღი მომავლიდან')
 });
 
 const employeeValidation = Yup.object({
