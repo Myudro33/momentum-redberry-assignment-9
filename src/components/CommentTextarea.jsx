@@ -51,7 +51,7 @@ const CommentTextarea = ({
         <textarea
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="resize-none w-full h-full p-2"
+          className="resize-none w-full h-full p-2 outline-none"
         />
         <TheButton
           onClick={click}

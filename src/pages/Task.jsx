@@ -120,7 +120,7 @@ const Task = () => {
       </div>
       <div className="w-[55%]  p-10 rounded-md bg-[#F8F3FEA6]">
         <CommentTextarea parent setComments={setComments} comments={comments} id={task?.id} />
-        <h1 className="mt-6">კომენტარები <span>{comments?.length}</span></h1>
+        <h1 className="mt-6">კომენტარები <span className="rounded-3xl py-0.5 px-3 text-white bg-[color:var(--solid-button)]" >{comments?.length}</span></h1>
         <div>
           {comments?.map((item)=>(
             <TheComment setComments={setComments} comments={comments} id={task?.id} parent_id={item.id} author_avatar={item.author_avatar} author_nickname={item.author_nickname} text={item.text} key={item.id} subcoments={item.sub_comments} />
