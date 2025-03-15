@@ -47,7 +47,7 @@ const CommentTextarea = ({
   };
   return (
     <>
-      <div style={style} className="relative w-full h-32">
+      <div style={style} className="relative w-full h-32 bg-white">
         <textarea
           value={value}
           onChange={(e) => setValue(e.target.value)}

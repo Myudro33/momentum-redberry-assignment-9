@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const TheHeader = ({setModal}) => {
   const navigate= useNavigate()
   return (
-    <div className='w-screen h-24 px-[7.5rem] py-[1.9rem] fixed flex justify-between items-center'>
+    <div className='w-screen bg-white shadow-md z-50 h-24 px-[7.5rem] py-[1.9rem] fixed flex justify-between items-center'>
       <img className='cursor-pointer' onClick={()=>navigate('/')} src={logo} alt="logo" />
       <div className='grid gap-5 grid-cols-2'>
         <TheButton onClick={()=>setModal('employee')} text='თანამშრომლის შექმნა' />

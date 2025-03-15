@@ -118,7 +118,7 @@ const Task = () => {
           </div>
         </div>
       </div>
-      <div className="w-[55%]  p-10 rounded-md">
+      <div className="w-[55%]  p-10 rounded-md bg-[#F8F3FEA6]">
         <CommentTextarea parent setComments={setComments} comments={comments} id={task?.id} />
         <h1 className="mt-6">კომენტარები <span>{comments?.length}</span></h1>
         <div>
