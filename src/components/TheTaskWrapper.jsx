@@ -26,23 +26,23 @@ const TheTaskWrapper = () => {
     getData();
   }, []);
   return (
-    <div className="w-screen px-[7.5rem] flex justify-between">
-      <div className="w-[20rem]">
+    <div className="w-screen px-[7.5rem] flex justify-between ">
+      <div className="w-[19rem]">
         {priority1Tasks.map((item) => (
          <TheTaskCard key={item.id} item={item} index={0} />
         ))}
       </div>
-      <div className="w-[20rem]">
+      <div className="w-[19rem]">
         {priority2Tasks.map((item) => (
          <TheTaskCard key={item.id} item={item} index={1} />
         ))}
       </div>
-      <div className="w-[20rem]">
+      <div className="w-[19rem]">
         {priority3Tasks.map((item) => (
          <TheTaskCard key={item.id} item={item} index={2} />
         ))}
       </div>
-      <div className="w-[20rem]">
+      <div className="w-[19rem]">
         {priority4Tasks.map((item) => (
          <TheTaskCard key={item.id} item={item} index={3} />
         ))}

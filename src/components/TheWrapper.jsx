@@ -24,7 +24,7 @@ const TheWrapper = () => {
           <div
             key={item.id}
             style={{ backgroundColor: getStatusBackgroundColor()[item.id - 1] }}
-            className={`w-[20rem] rounded-xl text-xl text-white flex items-center justify-center h-[3.375rem]`}
+            className={`w-[19rem] rounded-xl text-xl text-white flex items-center justify-center h-[3.375rem]`}
           >
             {item.name}
           </div>

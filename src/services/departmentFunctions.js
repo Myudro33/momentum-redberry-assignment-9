@@ -1,7 +1,7 @@
 const department = [
     {
         id:1,
-        name:'ადმინისტრაცია',
+        name:'ადმინ. დეპ.',
         color:'#FA4D4D'
     },
     {
