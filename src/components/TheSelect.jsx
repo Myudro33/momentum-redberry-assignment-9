@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ErrorMessage } from "formik";
 import EmployeeCard from "./EmployeeCard";
 import plusIcon from "../assets/plus-icon.png";
+import axios from '../services/axiosService'
 
 const TheSelect = ({
   name,
@@ -15,17 +16,24 @@ const TheSelect = ({
   employees,
   selectedValue,
   setModal,
+  id
 }) => {
   const [selected, setSelected] = useState();
 
   const handleChange = (item) => {
+    
+
+    if(name=="status"){
+       axios({ method: "PUT", endpoint: `/tasks/${id}`, body: {status_id:item.id} });       
+    }
+    
     setSelected(item);
     setSelectedValue(item);
     setFieldValue(name, item.id);
-
     if (name === "employee_id") {
       setFieldValue(name, item.id);
     }
+ 
 
     if (setFilteredEmployees) {
       setSelectedValue("");
@@ -37,7 +45,9 @@ const TheSelect = ({
 
   useEffect(() => {
     if (defaultValue) {
-      setFieldValue(name, defaultValue.id);
+      if(name!=='status'){
+        setFieldValue(name, defaultValue.id);
+      }
       setSelected(defaultValue);
     }
   }, [defaultValue, name, setFieldValue]);
@@ -53,7 +63,7 @@ const TheSelect = ({
 
   return (
     <div style={{ width }} className="h-25 flex flex-col">
-      <label className="font-semibold text-sm">{label} *</label>
+      <label className="font-semibold text-sm">{label}</label>
       <div className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border border-[color:var(--border-color)]">
         <button type="button" className="flex items-center text-sm h-8 w-full">
           {selected?.icon && (
