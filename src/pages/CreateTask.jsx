@@ -7,15 +7,16 @@ import TheSelect from "../components/TheSelect";
 import TheDatePicker from "../components/TheDatePicker";
 import TheButton from "../components/TheButton";
 import axios from "../services/axiosService";
+import { useNavigate } from "react-router-dom";
 
-const CreateTask = () => {
+const CreateTask = ({setModal}) => {
   const [priorities, setPriorities] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
-
+  const router = useNavigate()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,6 +45,7 @@ const CreateTask = () => {
         validationSchema={taksValidation}
         onSubmit={(values) => {
           axios({method: 'POST', endpoint: "/tasks", body: values});
+          router('/')
         }}
       >
         {({
@@ -132,6 +134,7 @@ const CreateTask = () => {
                     data={filteredEmployees}
                     setFieldValue={setFieldValue}
                     setSelectedValue={setSelectedValue}
+                    setModal={setModal}
                   />
                 </div>
                 <TheDatePicker

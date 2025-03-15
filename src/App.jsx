@@ -16,7 +16,7 @@ const App = () => {
      {modal!==null&&<ModalWrapper modal={modal} setModal={setModal} />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/task" element={<CreateTask />} />
+        <Route path="/task" element={<CreateTask setModal={setModal} />} />
       </Routes>
     </BrowserRouter>
     </div>
