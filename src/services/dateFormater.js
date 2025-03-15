@@ -1,10 +1,19 @@
 const DateFormatter = (date) => {
-  
   const givenDate = new Date(date);
 
   const georgianMonths = [
-    "იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", 
-    "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"
+    "იან",
+    "თებ",
+    "მარ",
+    "აპრ",
+    "მაი",
+    "ივნ",
+    "ივლ",
+    "აგვ",
+    "სექ",
+    "ოქტ",
+    "ნოე",
+    "დეკ",
   ];
 
   const day = givenDate.getDate();
@@ -13,7 +22,19 @@ const DateFormatter = (date) => {
 
   const formattedDate = `${day} ${georgianMonths[month]}, ${year}`;
 
-  return formattedDate
+  return formattedDate;
+};
+const getDateDay = (dateString) => {
+  const daysInGeorgian = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ"];
+
+  const date = new Date(dateString);
+
+  const dayOfWeek = daysInGeorgian[date.getDay()];
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${dayOfWeek} - ${day}/${month}/${year}`;
 };
 
-export default DateFormatter;
+export  {DateFormatter,getDateDay};
