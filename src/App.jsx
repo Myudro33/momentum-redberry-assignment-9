@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ModalWrapper from "./components/modal/ModalWrapper";
 import CreateTask from "./pages/CreateTask";
+import Task from "./pages/Task";
 
 const App = () => {
   const [modal, setModal] = useState(null);
@@ -17,6 +18,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/task" element={<CreateTask setModal={setModal} />} />
+        <Route path="/task/:id" element={<Task/>} />
       </Routes>
     </BrowserRouter>
     </div>
