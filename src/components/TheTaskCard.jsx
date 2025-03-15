@@ -4,7 +4,7 @@ import {
   getStatusBackgroundColor,
 } from "../services/getColors";
 import { getDepartmentInfo } from "../services/departmentFunctions";
-import DateFormatter from "../services/dateFormater";
+import {DateFormatter} from "../services/dateFormater";
 import comment from "../assets/comment-icon.png";
 import { Link } from "react-router-dom";
 
