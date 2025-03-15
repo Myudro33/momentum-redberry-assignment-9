@@ -6,10 +6,12 @@ import {
 import { getDepartmentInfo } from "../services/departmentFunctions";
 import DateFormatter from "../services/dateFormater";
 import comment from "../assets/comment-icon.png";
+import { Link } from "react-router-dom";
 
 const TheTaskCard = (props) => {
     
   return (
+    <Link to={`/task/${props.item.id}`} >
     <div
       key={props.item.id}
       style={{ borderColor: getStatusBackgroundColor()[props.index] }}
@@ -28,7 +30,7 @@ const TheTaskCard = (props) => {
             <p className="text-xs">{props.item.priority.name}</p>
           </div>
           <p
-            className="w-[5.5rem] px-2 text-xs h-6 text-white flex justify-center items-center rounded-2xl ml-2"
+            className="px-2 text-xs  h-6 text-white flex justify-center items-center rounded-2xl ml-2"
             style={{
               backgroundColor: getDepartmentInfo(props.item.department.id).color,
             }}
@@ -56,6 +58,7 @@ const TheTaskCard = (props) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
