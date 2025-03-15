@@ -90,6 +90,7 @@ const CreateTask = ({setModal}) => {
                       data={priorities}
                       setFieldValue={setFieldValue}
                       defaultValue={priorities[1]}
+                      setSelectedValue={setSelectedValue}
                     />
                   )}
                   {statuses?.length > 0 && (
@@ -103,6 +104,7 @@ const CreateTask = ({setModal}) => {
                       data={statuses}
                       setFieldValue={setFieldValue}
                       defaultValue={statuses[0]}
+                      setSelectedValue={setSelectedValue}
                     />
                   )}
                 </div>

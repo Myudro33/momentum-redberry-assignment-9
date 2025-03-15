@@ -55,7 +55,7 @@ const TheSelect = ({
     <div style={{ width }} className="h-25 flex flex-col">
       <label className="font-semibold text-sm">{label} *</label>
       <div className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border border-[color:var(--border-color)]">
-        <button type="button" className="flex items-center">
+        <button type="button" className="flex items-center text-sm h-8 w-full">
           {selected?.icon && (
             <img className="mr-2" src={selected.icon} alt="icon" />
           )}

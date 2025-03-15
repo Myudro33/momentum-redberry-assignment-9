@@ -15,6 +15,7 @@ import addEmployee from "../../api/addEmployee";
 const EmployeeModal = ({ setModal }) => {
   const [image, setImage] = useState(null);
   const [departments, setDepartments] = useState([]);
+    const [selectedValue, setSelectedValue] = useState("");
   useEffect(() => {
     const getData = async () => {
       try {
@@ -86,6 +87,8 @@ const EmployeeModal = ({ setModal }) => {
               data={departments}
               style="3rem"
               label="დეპარტამენტი"
+              setFieldValue={setFieldValue}
+              setSelectedValue={setSelectedValue}
             />
             <div className="flex justify-end mt-20">
               <div className="w-[24rem] flex justify-between">

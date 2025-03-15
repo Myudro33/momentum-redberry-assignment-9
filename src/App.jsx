@@ -11,7 +11,7 @@ const App = () => {
     <div className="overflow-x-hidden">
 
     <BrowserRouter>
-      <TheHeader />
+      <TheHeader setModal={setModal} />
       <div className="w-screen h-24"></div>
      {modal!==null&&<ModalWrapper modal={modal} setModal={setModal} />}
       <Routes>
