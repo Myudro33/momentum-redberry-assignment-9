@@ -4,7 +4,7 @@ import TheInput from "../TheInput";
 import FileUploadInput from "../FileUploadInput";
 import TheSelect from "../TheSelect";
 import TheButton from "../TheButton";
-import axios from '../../services/axiosService'
+import axios from "../../services/axiosService";
 import { Formik, Form } from "formik";
 import {
   employeeValidation,
@@ -12,14 +12,17 @@ import {
 } from "../../utils/formValidations";
 import addEmployee from "../../api/addEmployee";
 
-const EmployeeModal = ({ setModal }) => {
+const EmployeeModal = ({ setModal, employees, setEmployees }) => {
   const [image, setImage] = useState(null);
   const [departments, setDepartments] = useState([]);
-    const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
   useEffect(() => {
     const getData = async () => {
       try {
-        const departments = await axios({endpoint:'/departments',method:'GET'});
+        const departments = await axios({
+          endpoint: "/departments",
+          method: "GET",
+        });
         setDepartments(departments);
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -31,12 +34,20 @@ const EmployeeModal = ({ setModal }) => {
     <Formik
       initialValues={employeeInitialSchema}
       validationSchema={employeeValidation}
-      onSubmit={(values) => {
-        addEmployee(values)
-        setModal(null)
+      onSubmit={async (values) => {
+        const user = await addEmployee(values);
+        setEmployees([...employees, user]);
+        setModal(null);
       }}
     >
-      {({ values, setFieldValue, errors,handleSubmit,handleBlur,handleChange }) => (
+      {({
+        values,
+        setFieldValue,
+        errors,
+        handleSubmit,
+        handleBlur,
+        handleChange,
+      }) => (
         <div className="w-[57.063rem] h-[47.875rem] rounded-xl bg-white shadow-xs flex flex-col pt-10 pb-14 px-12">
           <div className="w-full flex justify-end">
             <img
@@ -76,7 +87,6 @@ const EmployeeModal = ({ setModal }) => {
                 image={image}
                 setImage={setImage}
                 error={errors.avatar}
-                
               />
             </div>
             <TheSelect

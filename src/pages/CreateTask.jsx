@@ -9,23 +9,24 @@ import TheButton from "../components/TheButton";
 import axios from "../services/axiosService";
 import { useNavigate } from "react-router-dom";
 
-const CreateTask = ({setModal}) => {
+const CreateTask = ({ setModal, modal }) => {
   const [priorities, setPriorities] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
-  const router = useNavigate()
+  const router = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [priorities, statuses, departments, employees] = await Promise.all([
-          axios({method: 'GET', endpoint: "/priorities"}),
-          axios({method: 'GET', endpoint: "/statuses"}),
-          axios({method: 'GET', endpoint: "/departments"}),
-          axios({method: 'GET', endpoint: "/employees"}),
-        ]);
+        const [priorities, statuses, departments, employees] =
+          await Promise.all([
+            axios({ method: "GET", endpoint: "/priorities" }),
+            axios({ method: "GET", endpoint: "/statuses" }),
+            axios({ method: "GET", endpoint: "/departments" }),
+            axios({ method: "GET", endpoint: "/employees" }),
+          ]);
         setPriorities(priorities);
         setStatuses(statuses);
         setDepartments(departments);
@@ -37,6 +38,14 @@ const CreateTask = ({setModal}) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      const employee = await axios({ method: "GET", endpoint: "/employees" });
+      setEmployees(employee);
+    }
+    fetchEmployees();
+  }, [modal]);
+
   return (
     <div className="px-[7.5rem] mt-5">
       <h1 className="text-2xl font-semibold">შექმენი ახალი დავალება</h1>
@@ -44,8 +53,8 @@ const CreateTask = ({setModal}) => {
         initialValues={taskInitialSchema}
         validationSchema={taksValidation}
         onSubmit={(values) => {
-          axios({method: 'POST', endpoint: "/tasks", body: values});
-          router('/')
+          axios({ method: "POST", endpoint: "/tasks", body: values });
+          router("/");
         }}
       >
         {({

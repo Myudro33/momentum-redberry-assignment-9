@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import EmployeeModal from './EmployeeModal';
 
-const ModalWrapper = ({modal,setModal}) => {
+const ModalWrapper = ({modal,setModal,employees,setEmployees}) => {
     useEffect(() => {
         if (modal) {
           document.body.style.overflow = "hidden";
@@ -20,7 +20,7 @@ const ModalWrapper = ({modal,setModal}) => {
       };
   return (
     <div onClick={handleBackdropClick} className='w-full top-0 z-60 h-screen bg-[#0D0F1026] absolute flex justify-center items-center'>
-      {modal&&<EmployeeModal setModal={setModal} />}
+      {modal&&<EmployeeModal employees={employees} setEmployees={setEmployees} setModal={setModal} />}
     </div>
   )
 }

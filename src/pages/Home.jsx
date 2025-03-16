@@ -6,7 +6,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import { applyFilters } from "../services/filterService";
 import FilterChips from "../components/filter/FilterChips";
 
-const Home = () => {
+const Home = ({employees,setEmployees}) => {
   const [tasks, setTasks] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -82,6 +82,8 @@ const Home = () => {
           filteredData={filteredData}
           setFilteredData={setFilteredData}
           tasks={tasks}
+          employees={employees}
+          setEmployees={setEmployees}
         />
         <FilterChips />
       </div>

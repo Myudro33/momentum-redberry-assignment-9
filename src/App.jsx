@@ -8,16 +8,17 @@ import Task from "./pages/Task";
 
 const App = () => {
   const [modal, setModal] = useState(null);
+  const [employees, setEmployees] = useState([]);
   return (
     <div className="overflow-x-hidden">
 
     <BrowserRouter>
       <TheHeader setModal={setModal} />
       <div className="w-screen h-24"></div>
-     {modal!==null&&<ModalWrapper modal={modal} setModal={setModal} />}
+     {modal!==null&&<ModalWrapper setEmployees={setEmployees} employees={employees} modal={modal} setModal={setModal} />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/task" element={<CreateTask setModal={setModal} />} />
+        <Route path="/" element={<Home employees={employees} setEmployees={setEmployees} />} />
+        <Route path="/task" element={<CreateTask employees={employees} setEmployees={setEmployees} modal={modal} setModal={setModal} />} />
         <Route path="/task/:id" element={<Task/>} />
       </Routes>
     </BrowserRouter>

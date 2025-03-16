@@ -15,6 +15,8 @@ const TheFilter = ({
   setSelectedPriorities,
   selectedEmployees,
   setSelectedEmployees,
+  employees,
+  setEmployees
 }) => {
   const [filters, setFilters] = useState({
     department: false,
@@ -23,7 +25,6 @@ const TheFilter = ({
   });
   const [departments, setDepartments] = useState([]);
   const [priorities, setPriorities] = useState([]);
-  const [employees, setEmployees] = useState([]);
 
   const { department, prioritie, employee } = filters;
   const toggleFilter = (filter) => {
