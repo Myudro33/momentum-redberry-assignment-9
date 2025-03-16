@@ -1,8 +1,37 @@
 import React from "react";
 import EmployeeCard from "../EmployeeCard";
 import TheButton from "../TheButton";
+import { applyFilters, setQueryParams } from "../../services/filterService";
+import { useSearchParams } from "react-router-dom";
 
-const FilterByEmployee = ({ show, employees }) => {
+const FilterByEmployee = ({
+  show,
+  employees,
+  selectedEmployees,
+  setSelectedemployees,
+  toggleSelection,
+  tasks,
+  setFilteredData,
+}) => {
+  const data = [...tasks];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const prioritiesFromQuery = searchParams.get("priorities")?.split(",") || [];
+  const departmentsFromQuery =
+    searchParams.get("departments")?.split(",") || [];
+  const click = () => {
+    applyFilters(
+      departmentsFromQuery,
+      selectedEmployees,
+      prioritiesFromQuery,
+      setFilteredData,
+      [...data]
+    );
+    setQueryParams(
+      setSearchParams,
+      { employees: selectedEmployees },
+      searchParams
+    );
+  };
   return (
     <div
       className={`absolute top-14 p-3 -left-2 w-[20rem] bg-white border border-[color:var(--solid-button)] rounded-[.625rem] ${
@@ -19,6 +48,10 @@ const FilterByEmployee = ({ show, employees }) => {
               type="checkbox"
               name={employee.name}
               id={employee.id}
+              checked={selectedEmployees.includes(employee.id)}
+              onChange={() =>
+                toggleSelection(employee.id, setSelectedemployees)
+              }
               className="mr-2 shrink-0 w-5 h-5 cursor-pointer"
             />
             <label className="cursor-pointer" htmlFor={employee.id}>
@@ -31,7 +64,8 @@ const FilterByEmployee = ({ show, employees }) => {
             </label>
           </div>
         ))}
-         <TheButton
+      <TheButton
+        onClick={click}
         type="button"
         rounded
         solid

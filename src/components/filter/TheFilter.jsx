@@ -8,7 +8,6 @@ import FilterByEmployee from "./FilterByEmployee";
 
 const TheFilter = ({
   tasks,
-  filteredData,
   setFilteredData,
   selectedDepartments,
   setSelectedDepartments,
@@ -126,7 +125,7 @@ const TheFilter = ({
             alt="arrow down"
           />{" "}
         </p>
-        <FilterByEmployee show={employee} employees={employees} />
+        <FilterByEmployee tasks={tasks} toggleSelection={toggleSelection} selectedEmployees={selectedEmployees} setFilteredData={setFilteredData} setSelectedemployees={setSelectedEmployees} show={employee} employees={employees} />
       </div>
     </div>
   );
