@@ -6,7 +6,17 @@ import FilterByDepartment from "./FilterByDepartment";
 import FilterByPriorities from "./FilterByPriorities";
 import FilterByEmployee from "./FilterByEmployee";
 
-const TheFilter = () => {
+const TheFilter = ({
+  tasks,
+  filteredData,
+  setFilteredData,
+  selectedDepartments,
+  setSelectedDepartments,
+  selectedPriorities,
+  setSelectedPriorities,
+  selectedEmployees,
+  setSelectedEmployees,
+}) => {
   const [filters, setFilters] = useState({
     department: false,
     prioritie: false,
@@ -15,13 +25,24 @@ const TheFilter = () => {
   const [departments, setDepartments] = useState([]);
   const [priorities, setPriorities] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const { department, prioritie, employee } = filters;
 
+  const { department, prioritie, employee } = filters;
   const toggleFilter = (filter) => {
     setFilters({
       department: filter === "department" ? !filters.department : false,
       prioritie: filter === "prioritie" ? !filters.prioritie : false,
       employee: filter === "employee" ? !filters.employee : false,
+    });
+  };
+
+  const toggleSelection = (value, setSelection) => {
+    setSelection((prev) => {
+      const updatedSelection = prev.includes(value)
+        ? prev.filter((v) => v !== value) 
+        : [...prev, value];
+  
+      console.log("Updated Selection:", updatedSelection);
+      return updatedSelection;
     });
   };
 
@@ -61,7 +82,15 @@ const TheFilter = () => {
             alt="arrow down"
           />{" "}
         </p>
-        <FilterByDepartment show={department} departments={departments} />
+        <FilterByDepartment
+          tasks={tasks}
+          setFilteredData={setFilteredData}
+          toggleSelection={toggleSelection}
+          selectedDepartments={selectedDepartments}
+          setSelectedDepartments={setSelectedDepartments}
+          show={department}
+          departments={departments}
+        />
       </div>
       <div className="flex items-center relative">
         <p

@@ -6,7 +6,7 @@ const TheTaskWrapper = ({ tasks }) => {
     return tasks.filter((task) => task.status.id === id);
   };
   return (
-    <div className="w-screen px-[7.5rem] flex justify-between ">
+    <div className="w-screen px-[7.5rem] min-h-40 flex justify-between ">
       <div className="w-[19rem]">
         {setData(1).map((item) => (
           <TheTaskCard key={item.id} item={item} index={0} />
