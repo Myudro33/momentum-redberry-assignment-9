@@ -1,5 +1,5 @@
 import React from "react";
-import TheFilter from "../components/TheFilter";
+import TheFilter from "../components/filter/TheFilter";
 import TheWrapper from "../components/TheWrapper";
 
 const Home = () => {
