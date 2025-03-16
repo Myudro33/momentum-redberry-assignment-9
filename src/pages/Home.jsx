@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import TheFilter from "../components/filter/TheFilter";
 import TheWrapper from "../components/TheWrapper";
 import axios from "../services/axiosService";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { applyFilters } from "../services/filterService";
+import FilterChips from "../components/filter/FilterChips";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedPriorities, setSelectedPriorities] = useState([]);
   const [selectedEmployees, setSelectedEmployees] = useState([]);
-
+  const { search } = useLocation();
   useEffect(() => {
     const getData = async () => {
       try {
@@ -42,6 +43,23 @@ const Home = () => {
 
     getData();
   }, []);
+  useEffect(() => {
+    const departmentsFromQuery =
+      searchParams.get("departments")?.split(",") || [];
+    const prioritiesFromQuery =
+      searchParams.get("priorities")?.split(",") || [];
+    const employeesFromQuery = searchParams.get("employees")?.split(",") || [];
+    setSelectedDepartments(departmentsFromQuery);
+    setSelectedPriorities(prioritiesFromQuery);
+    setSelectedEmployees(employeesFromQuery);
+    applyFilters(
+      departmentsFromQuery,
+      employeesFromQuery,
+      prioritiesFromQuery,
+      setFilteredData,
+      [...tasks]
+    );
+  }, [search]);
   const displayData =
     filteredData.length !== 0 ||
     selectedDepartments.length ||
@@ -65,6 +83,7 @@ const Home = () => {
           setFilteredData={setFilteredData}
           tasks={tasks}
         />
+        <FilterChips />
       </div>
       <TheWrapper tasks={displayData} />
     </>
