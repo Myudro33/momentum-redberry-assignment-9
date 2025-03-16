@@ -3,7 +3,7 @@ import axios from '../services/axiosService'
 import {getStatusBackgroundColor} from "../services/getColors";
 import TheTaskWrapper from "./TheTaskWrapper";
 
-const TheWrapper = () => {
+const TheWrapper = ({tasks}) => {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const TheWrapper = () => {
           </div>
         ))}
       </div>
-      <TheTaskWrapper />
+      <TheTaskWrapper tasks={tasks}  />
     </>
   );
 };
