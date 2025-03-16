@@ -15,7 +15,7 @@
   
     if (selectedEmployees.length) {
       filtered = filtered.filter((task) =>
-        selectedEmployees.includes(task.employee.id)
+        selectedEmployees.includes(`${task.employee?.name} ${task.employee?.surname}`)
       );
     }
   

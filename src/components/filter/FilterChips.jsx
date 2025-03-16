@@ -27,7 +27,6 @@ const FilterChips = () => {
     }
 
     setChips(parsedChips);
-    console.log(parsedChips);
   }, [search]);
 
   const handleRemoveChip = (key, chip) => {
