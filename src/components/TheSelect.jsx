@@ -57,7 +57,7 @@ const TheSelect = ({
       avatar={item.avatar}
       name={item.name}
       surname={item.surname}
-      props={{ name, selectedValue }}
+      page={name}
     />
   );
 

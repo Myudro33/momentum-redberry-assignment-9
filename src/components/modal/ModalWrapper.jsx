@@ -19,7 +19,7 @@ const ModalWrapper = ({modal,setModal}) => {
         }
       };
   return (
-    <div onClick={handleBackdropClick} className='w-full top-0 z-20 h-screen bg-[#0D0F1026] absolute flex justify-center items-center'>
+    <div onClick={handleBackdropClick} className='w-full top-0 z-60 h-screen bg-[#0D0F1026] absolute flex justify-center items-center'>
       {modal&&<EmployeeModal setModal={setModal} />}
     </div>
   )

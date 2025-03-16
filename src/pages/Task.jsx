@@ -104,7 +104,8 @@ const Task = () => {
               avatar={task?.employee.avatar}
               name={task?.employee.name}
               surname={task?.employee.surname}
-              props={{ department: task?.department.name, name: "task" }}
+              page={'task'}
+              department={task?.department.name}
             />
           </div>
           <div className="w-full flex mt-3 items-center justify-between">
