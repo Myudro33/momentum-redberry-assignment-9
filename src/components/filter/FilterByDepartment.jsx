@@ -1,6 +1,6 @@
 import React from "react";
 import TheButton from "../TheButton";
-import { applyFilters,setQueryParams } from "../../services/filterService";
+import { applyFilters, setQueryParams } from "../../services/filterService";
 import { useSearchParams } from "react-router-dom";
 const FilterByDepartment = ({
   show,
@@ -11,11 +11,23 @@ const FilterByDepartment = ({
   tasks,
   setFilteredData,
 }) => {
-  const data = [...tasks]
+  const data = [...tasks];
   const [searchParams, setSearchParams] = useSearchParams();
+  const prioritiesFromQuery = searchParams.get("priorities")?.split(",") || [];
+  const employeesFromQuery = searchParams.get("employees")?.split(",") || [];
   const click = () => {
-    applyFilters(selectedDepartments, [], [], setFilteredData, [...data]);
-    setQueryParams(setSearchParams,selectedDepartments,[], []);
+    applyFilters(
+      selectedDepartments,
+      employeesFromQuery,
+      prioritiesFromQuery,
+      setFilteredData,
+      [...data]
+    );
+    setQueryParams(
+      setSearchParams,
+      { departments: selectedDepartments },
+      searchParams
+    );
   };
   return (
     <div
