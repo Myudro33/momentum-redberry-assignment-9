@@ -1,7 +1,36 @@
 import React from "react";
 import TheButton from "../TheButton";
+import { applyFilters, setQueryParams } from "../../services/filterService";
+import { useSearchParams } from "react-router-dom";
 
-const FilterByPriorities = ({ show, priorities }) => {
+const FilterByPriorities = ({
+  show,
+  priorities,
+  selectedPriorities,
+  setSelectedPriorities,
+  toggleSelection,
+  tasks,
+  setFilteredData,
+}) => {
+  const data = [...tasks];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const employeesFromQuery = searchParams.get("employees")?.split(",") || [];
+  const departmentsFromQuery =
+    searchParams.get("departments")?.split(",") || [];
+  const click = () => {
+    applyFilters(
+      departmentsFromQuery,
+      employeesFromQuery,
+      selectedPriorities,
+      setFilteredData,
+      [...data]
+    );
+    setQueryParams(
+      setSearchParams,
+      { priorities: selectedPriorities },
+      searchParams
+    );
+  };
   return (
     <div
       className={`absolute top-14 p-3 -left-2 w-[20rem] bg-white border border-[color:var(--solid-button)] rounded-[.625rem] ${
@@ -17,15 +46,23 @@ const FilterByPriorities = ({ show, priorities }) => {
             <input
               value={prioritie.name}
               id={prioritie.name}
+              checked={selectedPriorities.includes(prioritie.name)}
+              onChange={() =>
+                toggleSelection(prioritie.name, setSelectedPriorities)
+              }
               className="w-5 h-5 shrink-0 cursor-pointer"
               type="checkbox"
             />
-            <label className="ml-2 text-xs cursor-pointer" htmlFor={prioritie.name}>
+            <label
+              className="ml-2 text-xs cursor-pointer"
+              htmlFor={prioritie.name}
+            >
               {prioritie.name}
             </label>
           </div>
         ))}
       <TheButton
+        onClick={click}
         type="button"
         rounded
         solid

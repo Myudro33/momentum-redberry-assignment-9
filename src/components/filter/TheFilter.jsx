@@ -38,10 +38,8 @@ const TheFilter = ({
   const toggleSelection = (value, setSelection) => {
     setSelection((prev) => {
       const updatedSelection = prev.includes(value)
-        ? prev.filter((v) => v !== value) 
+        ? prev.filter((v) => v !== value)
         : [...prev, value];
-  
-      console.log("Updated Selection:", updatedSelection);
       return updatedSelection;
     });
   };
@@ -105,7 +103,15 @@ const TheFilter = ({
             alt="arrow down"
           />{" "}
         </p>
-        <FilterByPriorities show={prioritie} priorities={priorities} />
+        <FilterByPriorities
+          toggleSelection={toggleSelection}
+          setSelectedPriorities={setSelectedPriorities}
+          tasks={tasks}
+          selectedPriorities={selectedPriorities}
+          setFilteredData={setFilteredData}
+          show={prioritie}
+          priorities={priorities}
+        />
       </div>
       <div className="flex items-center relative">
         <p

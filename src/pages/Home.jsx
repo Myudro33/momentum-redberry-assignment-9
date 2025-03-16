@@ -35,8 +35,6 @@ const Home = () => {
           setFilteredData,
           [...tasks]
         );
-        console.log('test home');
-        
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
