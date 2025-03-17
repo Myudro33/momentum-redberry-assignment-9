@@ -6,7 +6,7 @@ const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
   const borderColor = hasError ? 'red' : (touched[field.name] ? 'green' : 'var(--border-color)');
 
   return (
-    <div style={{ width: props.width || '22rem' }} className="flex h-20 flex-col">
+    <div style={{ width: props.width || '22rem' }} className="flex h-20 flex-col mt-14">
       <label className="font-semibold text-sm">{props.label}</label>
       <Field
         as="textarea"

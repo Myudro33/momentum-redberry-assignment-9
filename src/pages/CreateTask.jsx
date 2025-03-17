@@ -73,7 +73,7 @@ const CreateTask = ({ setModal, modal }) => {
             onSubmit={handleSubmit}
           >
             <div className="w-full flex justify-between">
-              <div className="w-[43%] h-[25rem] flex flex-col justify-between">
+              <div className="w-[43%] h-[26rem] flex flex-col justify-between">
                 <Field name="name" component={TheInput} label="სათაური" />
                 <Field name="description" component={TheTextarea} label="აღწერა" width="100%" />
                 <div className="flex w-full justify-between mt-28">
@@ -111,7 +111,7 @@ const CreateTask = ({ setModal, modal }) => {
                   )}
                 </div>
               </div>
-              <div className="w-[43%] h-[23.6rem] flex flex-col justify-between">
+              <div className="w-[43%] h-[25.2rem] flex flex-col justify-between">
                 <div className="h-[12.5rem] flex flex-col justify-between">
                   <TheSelect
                     name="department_id"
@@ -145,7 +145,6 @@ const CreateTask = ({ setModal, modal }) => {
                     touched={touched.employee_id}
                   />
                 </div>
-
                 <Field name="due_date" component={TheDatePicker} label="დედლაინი" />
               </div>
             </div>
