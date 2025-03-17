@@ -46,11 +46,11 @@ const FilterByEmployee = ({
           >
             <input
               type="checkbox"
-              name={employee.name}
+              name='employee'
               id={employee.id}
-              checked={selectedEmployees.includes(`${employee.name} ${employee.surname}`)}
+              checked={selectedEmployees?.includes(`${employee.name} ${employee.surname}`)}
               onChange={() =>
-                toggleSelection(`${employee.name} ${employee.surname}`, setSelectedemployees)
+                toggleSelection(`${employee.name} ${employee.surname}`, setSelectedemployees,true)
               }
               className="mr-2 shrink-0 w-5 h-5 cursor-pointer"
             />

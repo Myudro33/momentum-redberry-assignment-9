@@ -12,7 +12,7 @@ const Home = ({employees,setEmployees}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedPriorities, setSelectedPriorities] = useState([]);
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
+  const [selectedEmployees, setSelectedEmployees] = useState(null);
   const { search } = useLocation();
   useEffect(() => {
     const getData = async () => {
@@ -64,7 +64,7 @@ const Home = ({employees,setEmployees}) => {
     filteredData.length !== 0 ||
     selectedDepartments.length ||
     selectedPriorities.length ||
-    selectedEmployees.length
+    selectedEmployees
       ? filteredData
       : tasks;
 

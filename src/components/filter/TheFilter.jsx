@@ -35,7 +35,11 @@ const TheFilter = ({
     });
   };
 
-  const toggleSelection = (value, setSelection) => {
+  const toggleSelection = (value, setSelection,employee) => {
+    if(employee){
+      setSelection((prev) => (prev == value ? '' : value));
+      return
+    }
     setSelection((prev) => {
       const updatedSelection = prev.includes(value)
         ? prev.filter((v) => v !== value)
