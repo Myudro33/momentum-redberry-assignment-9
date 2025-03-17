@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import TheInput from "../components/TheInput";
 import { taskInitialSchema, taksValidation } from "../utils/formValidations";
 import TheTextarea from "../components/TheTextarea";
@@ -42,7 +42,7 @@ const CreateTask = ({ setModal, modal }) => {
     const fetchEmployees = async () => {
       const employee = await axios({ method: "GET", endpoint: "/employees" });
       setEmployees(employee);
-    }
+    };
     fetchEmployees();
   }, [modal]);
 
@@ -52,6 +52,8 @@ const CreateTask = ({ setModal, modal }) => {
       <Formik
         initialValues={taskInitialSchema}
         validationSchema={taksValidation}
+        validateOnChange={true}
+        validateOnBlur={true}
         onSubmit={(values) => {
           axios({ method: "POST", endpoint: "/tasks", body: values });
           router("/");
@@ -60,8 +62,9 @@ const CreateTask = ({ setModal, modal }) => {
         {({
           values,
           setFieldValue,
-          errors,
           handleSubmit,
+          errors,
+          touched,
           handleBlur,
           handleChange,
         }) => (
@@ -71,22 +74,8 @@ const CreateTask = ({ setModal, modal }) => {
           >
             <div className="w-full flex justify-between">
               <div className="w-[43%] h-[25rem] flex flex-col justify-between">
-                <TheInput
-                  name="name"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  label="სათაური"
-                  width="100%"
-                />
-                <TheTextarea
-                  name="description"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.description}
-                  label="აღწერა"
-                  width="100%"
-                />
+                <Field name="name" component={TheInput} label="სათაური" />
+                <Field name="description" component={TheTextarea} label="აღწერა" width="100%" />
                 <div className="flex w-full justify-between mt-28">
                   {priorities?.length > 0 && (
                     <TheSelect
@@ -100,6 +89,8 @@ const CreateTask = ({ setModal, modal }) => {
                       setFieldValue={setFieldValue}
                       defaultValue={priorities[1]}
                       setSelectedValue={setSelectedValue}
+                      errors={errors.priority_id}
+                      touched={touched.priority_id}
                     />
                   )}
                   {statuses?.length > 0 && (
@@ -114,6 +105,8 @@ const CreateTask = ({ setModal, modal }) => {
                       setFieldValue={setFieldValue}
                       defaultValue={statuses[0]}
                       setSelectedValue={setSelectedValue}
+                      errors={errors.status_id}
+                      touched={touched.status_id}
                     />
                   )}
                 </div>
@@ -133,6 +126,8 @@ const CreateTask = ({ setModal, modal }) => {
                     filteredEmployees={filteredEmployees}
                     setFilteredEmployees={setFilteredEmployees}
                     setSelectedValue={setSelectedValue}
+                    errors={errors.department_id}
+                    touched={touched.department_id}
                   />
                   <TheSelect
                     name="employee_id"
@@ -146,16 +141,12 @@ const CreateTask = ({ setModal, modal }) => {
                     setFieldValue={setFieldValue}
                     setSelectedValue={setSelectedValue}
                     setModal={setModal}
+                    errors={errors.employee_id}
+                    touched={touched.employee_id}
                   />
                 </div>
-                <TheDatePicker
-                  name="due_date"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.due_date}
-                  label="დედლაინი"
-                  width="50%"
-                />
+
+                <Field name="due_date" component={TheDatePicker} label="დედლაინი" />
               </div>
             </div>
             <div className="mt-20">

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ErrorMessage } from "formik";
 import EmployeeCard from "./EmployeeCard";
 import plusIcon from "../assets/plus-icon.png";
-import axios from '../services/axiosService'
+import axios from "../services/axiosService";
+import checkRed from "../assets/check-red.png";
 
 const TheSelect = ({
   name,
@@ -16,24 +17,27 @@ const TheSelect = ({
   employees,
   selectedValue,
   setModal,
-  id
+  id,
+  errors,
+  touched,
 }) => {
   const [selected, setSelected] = useState();
 
   const handleChange = (item) => {
-    
-
-    if(name=="status"){
-       axios({ method: "PUT", endpoint: `/tasks/${id}`, body: {status_id:item.id} });       
+    if (name === "status") {
+      axios({
+        method: "PUT",
+        endpoint: `/tasks/${id}`,
+        body: { status_id: item.id },
+      });
     }
-    
+
     setSelected(item);
     setSelectedValue(item);
     setFieldValue(name, item.id);
     if (name === "employee_id") {
       setFieldValue(name, item.id);
     }
- 
 
     if (setFilteredEmployees) {
       setSelectedValue("");
@@ -45,7 +49,7 @@ const TheSelect = ({
 
   useEffect(() => {
     if (defaultValue) {
-      if(name!=='status'){
+      if (name !== "status") {
         setFieldValue(name, defaultValue.id);
       }
       setSelected(defaultValue);
@@ -61,10 +65,20 @@ const TheSelect = ({
     />
   );
 
+  const hasError = errors && touched;
+  const borderColor = hasError
+    ? "red"
+    : touched
+    ? "green"
+    : "var(--border-color)";
+
   return (
     <div style={{ width }} className="h-25 flex flex-col">
-      <label className="font-semibold text-sm">{label}</label>
-      <div className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border border-[color:var(--border-color)]">
+      <label className="font-semibold text-sm">{label} *</label>
+      <div
+        className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border"
+        style={{ borderColor }}
+      >
         <button type="button" className="flex items-center text-sm h-8 w-full">
           {selected?.icon && (
             <img className="mr-2" src={selected.icon} alt="icon" />
@@ -93,9 +107,12 @@ const TheSelect = ({
             ))}
         </ul>
       </div>
-      <span className="text-red-500">
-        <ErrorMessage name={name} />
-      </span>
+      {hasError && (
+        <p className="text-red-500 flex items-center">
+          <img className="h-5 w-5 shrink-0 mr-1" src={checkRed} alt="check" />
+          <ErrorMessage name={name} />
+        </p>
+      )}
     </div>
   );
 };

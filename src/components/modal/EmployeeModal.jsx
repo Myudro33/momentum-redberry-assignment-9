@@ -5,7 +5,7 @@ import FileUploadInput from "../FileUploadInput";
 import TheSelect from "../TheSelect";
 import TheButton from "../TheButton";
 import axios from "../../services/axiosService";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import {
   employeeValidation,
   employeeInitialSchema,
@@ -34,6 +34,8 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
     <Formik
       initialValues={employeeInitialSchema}
       validationSchema={employeeValidation}
+      validateOnChange={true}
+      validateOnBlur={true}
       onSubmit={async (values) => {
         const user = await addEmployee(values);
         setEmployees([...employees, user]);
@@ -44,6 +46,7 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
         values,
         setFieldValue,
         errors,
+        touched,
         handleSubmit,
         handleBlur,
         handleChange,
@@ -63,18 +66,14 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
           <Form onSubmit={handleSubmit}>
             <div className="mt-8 w-full mb-12">
               <div className="flex justify-between">
-                <TheInput
+                <Field
                   name="firstName"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstName}
+                  component={TheInput}
                   label="სახელი"
                 />
-                <TheInput
+                <Field
                   name="lastName"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastName}
+                  component={TheInput}
                   label="გვარი"
                 />
               </div>
@@ -86,7 +85,8 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
                 value={values.avatar}
                 image={image}
                 setImage={setImage}
-                error={errors.avatar}
+                errors={errors.avatar}
+                touched={touched.avatar}
               />
             </div>
             <TheSelect
@@ -99,6 +99,8 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
               label="დეპარტამენტი"
               setFieldValue={setFieldValue}
               setSelectedValue={setSelectedValue}
+              errors={errors.department_id}
+              touched={touched.department_id}
             />
             <div className="flex justify-end mt-20">
               <div className="w-[24rem] flex justify-between">
