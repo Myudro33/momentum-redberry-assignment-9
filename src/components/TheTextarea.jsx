@@ -1,10 +1,15 @@
 import { Field, ErrorMessage } from 'formik';
-import React from 'react';
-
+import React,{useEffect} from 'react';
+import { useLocalStorage } from '../services/useLocalStorage';
 const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
   const hasError = errors[field.name] && touched[field.name];
   const borderColor = hasError ? 'red' : (touched[field.name] ? 'green' : 'var(--gray-border)');
-
+  const {setItem} = useLocalStorage(field.name)
+      useEffect(()=>{
+        if(props.store){
+          setItem(field.name,field.value)
+        }
+      },[field])
   return (
     <div style={{ width: props.width || '22rem' }} className="flex h-20 flex-col mt-14">
       <label className="font-semibold text-sm">{props.label}</label>

@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 const FILE_SIZE = 600 * 1024; // 600kb
 import { addDays, startOfDay } from "date-fns";
+import { useLocalStorage } from "../services/useLocalStorage";
+const { getItem } = useLocalStorage();
 const employeeInitialSchema = {
   firstName: "",
   lastName: "",
@@ -8,13 +10,13 @@ const employeeInitialSchema = {
   department_id: "",
 };
 const taskInitialSchema = {
-  name: "",
-  description: "",
-  due_date: "",
-  status_id: "",
-  employee_id: "",
-  priority_id: "",
-  department_id:""
+  name: getItem("name") || "",
+  description: getItem("description") || "",
+  priority_id: getItem("priority_id") || "",
+  status_id: getItem("status_id") || "",
+  employee_id: getItem("employee_id") || "",
+  department_id: getItem("department_id") || "",
+  due_date: getItem("due_date") || "",
 };
 const taksValidation = Yup.object({
   name: Yup.string()
@@ -29,13 +31,14 @@ const taksValidation = Yup.object({
       "შეიყვანეთ მინიმუმ 4 სიტყვა",
       (value) => !value || value.trim().split(/\s+/).length >= 4
     ),
-    priority_id:Yup.string().required('სავალდებულო'),
-    status_id:Yup.string().required('სავალდებულო'),
-    department_id:Yup.string().required('სავალდებულო'),
-    employee_id:Yup.string().required('სავალდებულო'),
-    due_date:Yup.date().required('სავალდებულო')
-    .typeError("არასწორი ფორმატი") 
-    .min(addDays(startOfDay(new Date()), 1),'მიუთითეთ თარიღი მომავლიდან')
+  priority_id: Yup.string().required("სავალდებულო"),
+  status_id: Yup.string().required("სავალდებულო"),
+  department_id: Yup.string().required("სავალდებულო"),
+  employee_id: Yup.string().required("სავალდებულო"),
+  due_date: Yup.date()
+    .required("სავალდებულო")
+    .typeError("არასწორი ფორმატი")
+    .min(addDays(startOfDay(new Date()), 1), "მიუთითეთ თარიღი მომავლიდან"),
 });
 
 const employeeValidation = Yup.object({
@@ -59,4 +62,9 @@ const employeeValidation = Yup.object({
   department_id: Yup.number().required("სავალდებულო"),
 });
 
-export { employeeValidation, employeeInitialSchema,taksValidation,taskInitialSchema };
+export {
+  employeeValidation,
+  employeeInitialSchema,
+  taksValidation,
+  taskInitialSchema,
+};

@@ -1,12 +1,21 @@
 import { ErrorMessage } from "formik";
-import React from "react";
+import React,{useEffect} from "react";
 import checkRed from "../assets/check-red.png";
-
+import { useLocalStorage } from "../services/useLocalStorage";
 
 const TheDatePicker = ({ field, form: { errors, touched }, ...props }) => {
   const hasError = errors[field.name] && touched[field.name];
-  const borderColor = hasError ? "red" : touched[field.name] ? "green" : "var(--gray-border)";
-
+  const borderColor = hasError
+    ? "red"
+    : touched[field.name]
+    ? "green"
+    : "var(--gray-border)";
+  const { setItem } = useLocalStorage();
+  useEffect(() => {
+    if (props.store) {
+      setItem(field.name, field.value);
+    }
+  }, [field]);
   return (
     <div
       style={{ width: props.width || "22rem" }}

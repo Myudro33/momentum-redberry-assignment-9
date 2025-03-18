@@ -4,8 +4,9 @@ import EmployeeCard from "./EmployeeCard";
 import plusIcon from "../assets/plus-icon.png";
 import axios from "../services/axiosService";
 import checkRed from "../assets/check-red.png";
-import solidArrow from '../assets/arrow-down-solid.png'
-import arrowDown from '../assets/arrow-down.png'
+import solidArrow from "../assets/arrow-down-solid.png";
+import arrowDown from "../assets/arrow-down.png";
+import { useLocalStorage } from "../services/useLocalStorage";
 
 const TheSelect = ({
   name,
@@ -22,9 +23,12 @@ const TheSelect = ({
   id,
   errors,
   touched,
+  store,
+  value,
 }) => {
   const [selected, setSelected] = useState();
   const [dropdown, setDropdown] = useState(false);
+  const { setItem, getItem } = useLocalStorage(name);
 
   const handleChange = (item) => {
     if (name === "status") {
@@ -36,17 +40,16 @@ const TheSelect = ({
     }
 
     setSelected(item);
-    setSelectedValue(item);
-    setFieldValue(name, item.id);
-    if (name === "employee_id") {
-      setFieldValue(name, item.id);
+    if(name==='department_id'||name==='employee_id'){
+      setSelectedValue(item);
     }
-
+    setFieldValue(name, item.id);
     if (setFilteredEmployees) {
-      setSelectedValue("");
-      setFieldValue("employee_id", null);
       const filter = employees.filter((empl) => empl.department.id === item.id);
       setFilteredEmployees(filter);
+    }
+    if (store) {
+      setItem(name, item);
     }
   };
 
@@ -57,17 +60,22 @@ const TheSelect = ({
       }
       setSelected(defaultValue);
     }
+    if (getItem(name)) {
+      setSelectedValue(getItem("employee_id") && getItem("employee_id"))
+      setFieldValue('employee_id',getItem("employee_id").id)
+      setFieldValue('department_id',getItem("department_id").id)
+      setSelected(getItem(name));
+    }
   }, [defaultValue, name, setFieldValue]);
 
   const renderEmployeeCard = (item) => (
     <EmployeeCard
-      avatar={item.avatar}
-      name={item.name}
-      surname={item.surname}
+      avatar={item?.avatar}
+      name={item?.name}
+      surname={item?.surname}
       page={name}
     />
   );
-
   const hasError = errors && touched;
   const borderColor = hasError
     ? "red"
@@ -83,14 +91,23 @@ const TheSelect = ({
         className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border"
         style={{ borderColor }}
       >
-        <button type="button" className="flex items-center text-sm h-8 w-full relative">
+        <button
+          type="button"
+          className="flex items-center text-sm h-8 w-full relative"
+        >
           {selected?.icon && (
             <img className="mr-2" src={selected.icon} alt="icon" />
           )}
           {name === "employee_id"
             ? renderEmployeeCard(selectedValue)
             : selected?.name}
-            <img className={`absolute right-0 ${!dropdown&&'rotate-180'} transition-all `} src={dropdown?solidArrow:arrowDown} alt="arrow" />
+          <img
+            className={`absolute right-0 ${
+              !dropdown && "rotate-180"
+            } transition-all `}
+            src={dropdown ? solidArrow : arrowDown}
+            alt="arrow"
+          />
         </button>
         {dropdown && (
           <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-10 p-2">
@@ -106,8 +123,14 @@ const TheSelect = ({
             )}
             {data &&
               data.map((item) => (
-                <li className="flex items-center hover:bg-blue-50 p-1 cursor-pointer" key={item.id} onClick={() => handleChange(item)}>
-                  {item.icon && <img src={item.icon} alt="icon" />}
+                <li
+                  className="flex items-center hover:bg-blue-50 p-1 cursor-pointer"
+                  key={item.id}
+                  onClick={() => handleChange(item)}
+                >
+                  {item.icon && (
+                    <img className="mr-2" src={item.icon} alt="icon" />
+                  )}
                   {name === "employee_id"
                     ? renderEmployeeCard(item)
                     : item.name}
