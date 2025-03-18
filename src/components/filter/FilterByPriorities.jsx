@@ -33,7 +33,7 @@ const FilterByPriorities = ({
   };
   return (
     <div
-      className={`absolute top-14 p-3 -left-2 w-[20rem] bg-white border border-[color:var(--solid-button)] rounded-[.625rem] ${
+      className={`absolute top-14 p-3 -left-2 w-[20rem] bg-white border border-[color:var(--purple)] rounded-[.625rem] ${
         show ? "block" : "hidden"
       } flex flex-wrap gap-2 `}
     >

@@ -10,13 +10,13 @@ body {
   font-family: "firaGO";
 }
 :root {
-  --solid-button: #8338EC;
-  --hover-button: #B588F4;
+  --purple: #8338EC;
+  --light-purple: #B588F4;
+  --gray-border:#CED4DA;
   --light-border: #DEE2E6;
   --yellow:#F7BC30;
   --orange:#FB5607;
   --pink:#FF006E;
   --blue:#3A86FF;
-  --border-color:#CED4DA;
   --gray:#474747
 }

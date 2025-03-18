@@ -25,7 +25,7 @@ const TheComment = ({
         <p className="text-[color:var(--gray)]"> {text}</p>
         <div
           onClick={() => setTextarea(true)}
-          className="flex items-center text-[color:var(--solid-button)] cursor-pointer mt-2"
+          className="flex items-center text-[color:var(--purple)] cursor-pointer mt-2"
         >
           <img className="mr-2" src={arrow} alt="arrow" />
           უპასუხე

@@ -73,7 +73,7 @@ const TheSelect = ({
     ? "red"
     : touched
     ? "green"
-    : "var(--border-color)";
+    : "var(--gray-border)";
 
   return (
     <div style={{ width }} className="h-25 flex flex-col">
@@ -93,10 +93,10 @@ const TheSelect = ({
             <img className={`absolute right-0 ${!dropdown&&'rotate-180'} transition-all `} src={dropdown?solidArrow:arrowDown} alt="arrow" />
         </button>
         {dropdown && (
-          <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--solid-button)] rounded-md z-10 p-2">
+          <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-10 p-2">
             {name === "employee_id" && (
               <button
-                className="text-[color:var(--solid-button)] cursor-pointer flex items-center w-full p-2"
+                className="text-[color:var(--purple)] cursor-pointer flex items-center w-full p-2"
                 type="button"
                 onClick={() => setModal("employee")}
               >

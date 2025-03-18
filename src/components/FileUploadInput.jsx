@@ -27,7 +27,7 @@ const FileUploadInput = (props) => {
   };
 
   const hasError = props.errors;
-  const borderColor = hasError ? 'red' : (props.touched ? 'green' : 'var(--border-color)');
+  const borderColor = hasError ? 'red' : (props.touched ? 'green' : 'var(--gray-border)');
 
   return (
     <div className="mt-10 h-[8rem]">

@@ -73,7 +73,7 @@ const TheFilter = ({
     <div className="w-[43rem] px-6 h-[2.75rem] mt-8 flex justify-between rounded-[.625rem] border border-[color:var(--light-border)]">
       <div className="flex items-center relative">
         <p
-          style={{ color: department && "var(--solid-button)" }}
+          style={{ color: department && "var(--purple)" }}
           onClick={() => toggleFilter("department")}
           className="flex items-center cursor-pointer"
         >
@@ -96,7 +96,7 @@ const TheFilter = ({
       </div>
       <div className="flex items-center relative">
         <p
-          style={{ color: prioritie && "var(--solid-button)" }}
+          style={{ color: prioritie && "var(--purple)" }}
           onClick={() => toggleFilter("prioritie")}
           className="flex items-center cursor-pointer"
         >
@@ -119,7 +119,7 @@ const TheFilter = ({
       </div>
       <div className="flex items-center relative">
         <p
-          style={{ color: employee && "var(--solid-button)" }}
+          style={{ color: employee && "var(--purple)" }}
           onClick={() => toggleFilter("employee")}
           className="flex items-center cursor-pointer"
         >

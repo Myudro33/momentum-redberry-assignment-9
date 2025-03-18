@@ -54,7 +54,7 @@ const FilterChips = () => {
     <div className='flex items-center flex-wrap mt-2'>
       {Object.entries(chips).flatMap(([key, values]) =>
         values.map((chip, index) => (
-          <div key={`${key}-${index}`} className='bg-white border border-[color:var(--border-color)] rounded-full px-4 py-2 m-1 text-xs flex items-center'>
+          <div key={`${key}-${index}`} className='bg-white border border-[color:var(--gray-border)] rounded-full px-4 py-2 m-1 text-xs flex items-center'>
             {chip}
             <img
               className='w-4 h-4 ml-2 cursor-pointer'

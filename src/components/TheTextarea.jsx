@@ -3,7 +3,7 @@ import React from 'react';
 
 const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
   const hasError = errors[field.name] && touched[field.name];
-  const borderColor = hasError ? 'red' : (touched[field.name] ? 'green' : 'var(--border-color)');
+  const borderColor = hasError ? 'red' : (touched[field.name] ? 'green' : 'var(--gray-border)');
 
   return (
     <div style={{ width: props.width || '22rem' }} className="flex h-20 flex-col mt-14">

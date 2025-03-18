@@ -8,7 +8,7 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
     ? "red"
     : touched[field.name]
     ? "green"
-    : "var(--border-color)";
+    : "var(--gray-border)";
 
   return (
     <div
