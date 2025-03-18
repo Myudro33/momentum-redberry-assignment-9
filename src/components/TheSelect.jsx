@@ -91,21 +91,17 @@ const TheSelect = ({
     : "var(--gray-border)";
 
   const handleDropdownToggle = () => {
-    console.log(name);
-
     setDropdown(name);
   };
-  const isOpen = dropdown === name; 
-
   return (
     <div style={{ width }} className="h-25 flex flex-col">
       <label className="font-semibold text-sm">{label}</label>
       <div
-        onClick={handleDropdownToggle}
+        
         className="relative inline-block h-11 w-full p-2 shrink-0 rounded-md border"
         style={{ borderColor }}
       >
-        <button
+        <button onClick={handleDropdownToggle}
           type="button"
           className="flex items-center text-sm h-8 w-full relative"
         >
@@ -117,13 +113,13 @@ const TheSelect = ({
             : selected?.name}
           <img
             className={`absolute right-0 ${
-              !isOpen && "rotate-180"
+              !dropdown === name && "rotate-180"
             } transition-all `}
-            src={isOpen ? solidArrow : arrowDown}
+            src={dropdown === name ? solidArrow : arrowDown}
             alt="arrow"
           />
         </button>
-        {isOpen && (
+        {dropdown === name && (
           <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-20 p-2">
             {name === "employee_id" && (
               <button
