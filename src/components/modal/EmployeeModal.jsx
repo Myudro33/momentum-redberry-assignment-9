@@ -16,6 +16,10 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
   const [image, setImage] = useState(null);
   const [departments, setDepartments] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
+  const [dropdown, setDropdown] = useState(null);
+  const handleDropdownToggle = (name) => {
+    setDropdown((prev) => (prev === name ? null : name));
+  };
   useEffect(() => {
     const getData = async () => {
       try {
@@ -66,16 +70,8 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
           <Form onSubmit={handleSubmit}>
             <div className="mt-8 w-full mb-12">
               <div className="flex justify-between">
-                <Field
-                  name="firstName"
-                  component={TheInput}
-                  label="სახელი"
-                />
-                <Field
-                  name="lastName"
-                  component={TheInput}
-                  label="გვარი"
-                />
+                <Field name="firstName" component={TheInput} label="სახელი" />
+                <Field name="lastName" component={TheInput} label="გვარი" />
               </div>
               <FileUploadInput
                 name="avatar"
@@ -96,15 +92,21 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
               value={values.department_id}
               data={departments}
               style="3rem"
-              label="დეპარტამენტი"
+              label="დეპარტამენტი *"
               setFieldValue={setFieldValue}
               setSelectedValue={setSelectedValue}
               errors={errors.department_id}
               touched={touched.department_id}
+              dropdown={dropdown}
+              setDropdown={handleDropdownToggle}
             />
             <div className="flex justify-end mt-20">
               <div className="w-[24rem] flex justify-between">
-                <TheButton onClick={() => setModal(null)} text="გაუქმება" />
+                <TheButton
+                  type="button"
+                  onClick={() => setModal(null)}
+                  text="გაუქმება"
+                />
                 <TheButton type="submit" solid text="დაამატე თანამშრომელი" />
               </div>
             </div>

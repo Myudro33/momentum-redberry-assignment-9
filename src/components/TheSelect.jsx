@@ -7,6 +7,7 @@ import checkRed from "../assets/check-red.png";
 import solidArrow from "../assets/arrow-down-solid.png";
 import arrowDown from "../assets/arrow-down.png";
 import { useLocalStorage } from "../services/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const TheSelect = ({
   name,
@@ -24,10 +25,10 @@ const TheSelect = ({
   errors,
   touched,
   store,
-  value,
+  dropdown,
+  setDropdown,
 }) => {
   const [selected, setSelected] = useState();
-  const [dropdown, setDropdown] = useState(false);
   const { setItem, getItem } = useLocalStorage(name);
 
   const handleChange = (item) => {
@@ -40,7 +41,7 @@ const TheSelect = ({
     }
 
     setSelected(item);
-    if(name==='department_id'||name==='employee_id'){
+    if (name === "department_id" || name === "employee_id") {
       setSelectedValue(item);
     }
     setFieldValue(name, item.id);
@@ -51,6 +52,7 @@ const TheSelect = ({
     if (store) {
       setItem(name, item);
     }
+    setDropdown(null);
   };
 
   useEffect(() => {
@@ -61,9 +63,9 @@ const TheSelect = ({
       setSelected(defaultValue);
     }
     if (getItem(name)) {
-      setSelectedValue(getItem("employee_id") && getItem("employee_id"))
-      setFieldValue('employee_id',getItem("employee_id").id)
-      setFieldValue('department_id',getItem("department_id").id)
+      setSelectedValue(getItem("employee_id") && getItem("employee_id"));
+      setFieldValue("employee_id", getItem("employee_id")?.id);
+      setFieldValue("department_id", getItem("department_id")?.id);
       setSelected(getItem(name));
     }
   }, [defaultValue, name, setFieldValue]);
@@ -76,6 +78,11 @@ const TheSelect = ({
       page={name}
     />
   );
+  const router = useNavigate();
+  const showModal = () => {
+    router("/");
+    setModal(true);
+  };
   const hasError = errors && touched;
   const borderColor = hasError
     ? "red"
@@ -83,12 +90,19 @@ const TheSelect = ({
     ? "green"
     : "var(--gray-border)";
 
+  const handleDropdownToggle = () => {
+    console.log(name);
+
+    setDropdown(name);
+  };
+  const isOpen = dropdown === name; 
+
   return (
     <div style={{ width }} className="h-25 flex flex-col">
-      <label className="font-semibold text-sm">{label} *</label>
+      <label className="font-semibold text-sm">{label}</label>
       <div
-        onClick={() => setDropdown((prev) => !prev)}
-        className="relative inline-block dropdown h-11 w-full p-2 shrink-0 rounded-md border"
+        onClick={handleDropdownToggle}
+        className="relative inline-block h-11 w-full p-2 shrink-0 rounded-md border"
         style={{ borderColor }}
       >
         <button
@@ -103,19 +117,19 @@ const TheSelect = ({
             : selected?.name}
           <img
             className={`absolute right-0 ${
-              !dropdown && "rotate-180"
+              !isOpen && "rotate-180"
             } transition-all `}
-            src={dropdown ? solidArrow : arrowDown}
+            src={isOpen ? solidArrow : arrowDown}
             alt="arrow"
           />
         </button>
-        {dropdown && (
-          <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-10 p-2">
+        {isOpen && (
+          <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-20 p-2">
             {name === "employee_id" && (
               <button
-                className="text-[color:var(--purple)] cursor-pointer flex items-center w-full p-2"
+                className="text-[color:var(--purple)] z-0 cursor-pointer flex items-center w-full p-2"
                 type="button"
-                onClick={() => setModal("employee")}
+                onClick={() => showModal()}
               >
                 <img className="mr-2" src={plusIcon} alt="icon" /> დაამატე
                 თანამშრომელი

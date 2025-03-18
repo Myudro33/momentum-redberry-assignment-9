@@ -17,6 +17,10 @@ const CreateTask = ({ setModal, modal }) => {
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
+  const [dropdown, setDropdown] = useState(null);
+  const handleDropdownToggle = (name) => {
+    setDropdown((prev) => (prev === name ? null : name));
+  };
   const router = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +60,7 @@ const CreateTask = ({ setModal, modal }) => {
         validateOnChange={true}
         validateOnBlur={true}
         onSubmit={(values) => {
-          addTask(values)
+          addTask(values);
           router("/");
         }}
       >
@@ -76,7 +80,13 @@ const CreateTask = ({ setModal, modal }) => {
             <div className="w-full flex justify-between">
               <div className="w-[43%] h-[26rem] flex flex-col justify-between">
                 <Field store name="name" component={TheInput} label="სათაური" />
-                <Field store name="description" component={TheTextarea} label="აღწერა" width="100%" />
+                <Field
+                  store
+                  name="description"
+                  component={TheTextarea}
+                  label="აღწერა"
+                  width="100%"
+                />
                 <div className="flex w-full justify-between mt-28">
                   {priorities?.length > 0 && (
                     <TheSelect
@@ -84,7 +94,7 @@ const CreateTask = ({ setModal, modal }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.priority_id}
-                      label="პრიორიტეტი"
+                      label="პრიორიტეტი *"
                       width="47%"
                       data={priorities}
                       setFieldValue={setFieldValue}
@@ -94,6 +104,8 @@ const CreateTask = ({ setModal, modal }) => {
                       errors={errors.priority_id}
                       touched={touched.priority_id}
                       store
+                      dropdown={dropdown}
+                      setDropdown={handleDropdownToggle}
                     />
                   )}
                   {statuses?.length > 0 && (
@@ -102,7 +114,7 @@ const CreateTask = ({ setModal, modal }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.status_id}
-                      label="სტატუსი"
+                      label="სტატუსი *"
                       width="47%"
                       data={statuses}
                       setFieldValue={setFieldValue}
@@ -112,6 +124,8 @@ const CreateTask = ({ setModal, modal }) => {
                       errors={errors.status_id}
                       touched={touched.status_id}
                       store
+                      dropdown={dropdown}
+                      setDropdown={handleDropdownToggle}
                     />
                   )}
                 </div>
@@ -123,7 +137,7 @@ const CreateTask = ({ setModal, modal }) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.department_id}
-                    label="დეპარტამენტი"
+                    label="დეპარტამენტი *"
                     width="100%"
                     data={departments}
                     setFieldValue={setFieldValue}
@@ -135,13 +149,15 @@ const CreateTask = ({ setModal, modal }) => {
                     errors={errors.department_id}
                     touched={touched.department_id}
                     store
+                    dropdown={dropdown}
+                    setDropdown={handleDropdownToggle}
                   />
                   <TheSelect
                     name="employee_id"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.employee_id}
-                    label="პასუხისმგებელი თანამშრომელი"
+                    label="პასუხისმგებელი თანამშრომელი *"
                     selectedValue={selectedValue}
                     width="100%"
                     data={filteredEmployees}
@@ -151,9 +167,16 @@ const CreateTask = ({ setModal, modal }) => {
                     errors={errors.employee_id}
                     touched={touched.employee_id}
                     store
+                    dropdown={dropdown}
+                    setDropdown={handleDropdownToggle}
                   />
                 </div>
-                <Field store name="due_date" component={TheDatePicker} label="დედლაინი" />
+                <Field
+                  store
+                  name="due_date"
+                  component={TheDatePicker}
+                  label="დედლაინი"
+                />
               </div>
             </div>
             <div className="mt-20">
