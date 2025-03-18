@@ -74,11 +74,7 @@ const EmployeeModal = ({ setModal, employees, setEmployees }) => {
                 <Field name="lastName" component={TheInput} label="გვარი" />
               </div>
               <FileUploadInput
-                name="avatar"
-                onChange={handleChange}
-                onBlur={handleBlur}
                 setFieldValue={setFieldValue}
-                value={values.avatar}
                 image={image}
                 setImage={setImage}
                 errors={errors.avatar}

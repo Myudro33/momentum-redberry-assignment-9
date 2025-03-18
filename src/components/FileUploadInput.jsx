@@ -1,35 +1,43 @@
 import React, { useRef, useState } from "react";
 import gallery from "../assets/gallery.png";
 import trashIcon from "../assets/trash-icon.png";
-import checkRed from '../assets/check-red.png'
-import { ErrorMessage } from "formik";
+import checkRed from "../assets/check-red.png";
 
-const FileUploadInput = (props) => {
+const FileUploadInput = ({
+  setFieldValue,
+  image,
+  setImage,
+  errors,
+  touched,
+}) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      props.setImage(file);
-      props.setFieldValue('avatar', file);
+      setImage(file);
+      setFieldValue("avatar", file);
       const preview = URL.createObjectURL(file);
       setPreviewUrl(preview);
     }
   };
-
   const handleRemoveImage = () => {
-    props.setImage(null);
+    setImage(null);
     setPreviewUrl(null);
-    props.setFieldValue('avatar', null);
+    setFieldValue("avatar", null);
   };
 
   const onChooseFile = () => {
     inputRef.current.click();
   };
 
-  const hasError = props.errors;
-  const borderColor = hasError ? 'red' : (props.touched ? 'green' : 'var(--gray-border)');
+  const hasError = errors;
+  const borderColor = hasError
+    ? "red"
+    : touched
+    ? "green"
+    : "var(--gray-border)";
 
   return (
     <div className="mt-10 h-[8rem]">
@@ -45,7 +53,7 @@ const FileUploadInput = (props) => {
           onChange={handleImageChange}
           className="hidden"
         />
-        {!props.image ? (
+        {!image ? (
           <div
             onClick={onChooseFile}
             className="w-full h-full flex items-center justify-center relative"
@@ -75,12 +83,10 @@ const FileUploadInput = (props) => {
           </div>
         )}
       </div>
-      <p className="text-red-500 h-10 flex items-center">
-             {hasError && (
-               <img className="shrink-0 mr-1" src={checkRed} alt="check" />
-             )}
-             <ErrorMessage name={props.name} />
-           </p>
+      <p className="text-red-500 flex items-center">
+        {errors && <img className="shrink-0 mr-1" src={checkRed} alt="check" />}
+        {errors}
+      </p>
     </div>
   );
 };
