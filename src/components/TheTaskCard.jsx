@@ -28,7 +28,7 @@ const TheTaskCard = ({item,index}) => {
             }}
             className="w-[5.9rem] h-[1.625rem] flex justify-center items-center border p-1 rounded-[.25rem]"
           >
-            <img src={item.priority.icon} alt="priority icon" />
+            <img className="mr-1" src={item.priority.icon} alt="priority icon" />
             <p className="text-xs">{item.priority.name}</p>
           </div>
           <p

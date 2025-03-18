@@ -172,7 +172,6 @@ const CreateTask = ({ setModal, modal }) => {
                   />
                 </div>
                 <Field
-                  store
                   name="due_date"
                   component={TheDatePicker}
                   label="დედლაინი"
