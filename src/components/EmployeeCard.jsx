@@ -16,11 +16,11 @@ const EmployeeCard = ({ avatar, name, surname, page,department }) => {
         </>
       )}
       {page === 'task' && (
-        <div className="flex justify-between items-center w-[55%] ">
+        <div className="flex items-center w-[55%] ">
           <img  className="w-6 h-6 mr-2 rounded-full" src={avatar} alt="avatar" />
           <div>
           <p className="text-xs">{department}</p>
-          <p className="text-black">{name} {surname}</p>
+          <p className="text-black text-sm">{name} {surname}</p>
           </div>
         </div>
       )}

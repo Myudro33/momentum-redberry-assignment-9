@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import gallery from "../assets/gallery.png";
 import trashIcon from "../assets/trash-icon.png";
+import checkRed from '../assets/check-red.png'
+import { ErrorMessage } from "formik";
 
 const FileUploadInput = (props) => {
   const inputRef = useRef(null);
@@ -73,7 +75,12 @@ const FileUploadInput = (props) => {
           </div>
         )}
       </div>
-      <p className="text-red-500">{props.errors}</p>
+      <p className="text-red-500 h-10 flex items-center">
+             {hasError && (
+               <img className="shrink-0 mr-1" src={checkRed} alt="check" />
+             )}
+             <ErrorMessage name={props.name} />
+           </p>
     </div>
   );
 };

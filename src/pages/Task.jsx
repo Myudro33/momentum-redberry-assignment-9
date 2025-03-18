@@ -45,7 +45,7 @@ const Task = () => {
             }}
             className="w-[5.9rem] h-[1.625rem] flex justify-center items-center border p-1 rounded-[.25rem]"
           >
-            <img src={task?.priority.icon} alt="priority icon" />
+            <img className="mr-1" src={task?.priority.icon} alt="priority icon" />
             <p className="text-xs">{task?.priority.name}</p>
           </div>
           <p
@@ -58,9 +58,9 @@ const Task = () => {
           </p>
         </div>
         <h1 className="font-semibold text-2xl mt-4">{task?.name}</h1>
-        <p className="text-[#343A40] h-20 text-xs mt-6 ">{task?.description}</p>
+        <p className="h-20 w-[26rem] text-xs mt-6 ">{task?.description}</p>
         <h1 className="text-xl">დავალების დეტალები</h1>
-        <div className="mt-12 w-[24rem] h-60 text-[var(--gray)]">
+        <div className="mt-8 w-[27.5rem] h-80 text-[var(--gray)]">
           <div className="w-full flex items-center justify-between">
             <p className="flex items-center text-sm w-40">
               <img className="w-5 h-5 mr-2" src={statusIcon} alt="status" />

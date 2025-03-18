@@ -8,7 +8,11 @@ const TheHeader = ({setModal}) => {
     <div className='w-screen bg-white shadow-md z-50 h-24 px-[7.5rem] py-[1.9rem] fixed flex justify-between items-center'>
       <img className='cursor-pointer' onClick={()=>navigate('/')} src={logo} alt="logo" />
       <div className='grid gap-5 grid-cols-2'>
-        <TheButton onClick={()=>setModal('employee')} text='თანამშრომლის შექმნა' />
+        <TheButton onClick={()=>{
+          localStorage.clear()
+          setModal(true)
+          navigate('/')
+        }} text='თანამშრომლის შექმნა' />
         <TheButton onClick={()=>navigate('/task')} solid text='+ შექმენი ახალი დავალება' />
       </div>
     </div>
