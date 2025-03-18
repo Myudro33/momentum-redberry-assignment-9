@@ -47,7 +47,7 @@ const CommentTextarea = ({
   };
   return (
     <>
-      <div style={style} className="relative w-full h-32 bg-white">
+      <div style={style} className={`relative w-full h-32 pb-14 bg-white rounded-md border border-[var(--gray-border)] ${error&&'border border-red-500'} `}>
         <textarea
           value={value}
           onChange={(e) => setValue(e.target.value)}
