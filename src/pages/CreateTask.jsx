@@ -8,6 +8,7 @@ import TheDatePicker from "../components/TheDatePicker";
 import TheButton from "../components/TheButton";
 import axios from "../services/axiosService";
 import { useNavigate } from "react-router-dom";
+import addTask from "../api/addTask";
 
 const CreateTask = ({ setModal, modal }) => {
   const [priorities, setPriorities] = useState([]);
@@ -55,7 +56,7 @@ const CreateTask = ({ setModal, modal }) => {
         validateOnChange={true}
         validateOnBlur={true}
         onSubmit={(values) => {
-          axios({ method: "POST", endpoint: "/tasks", body: values });
+          addTask(values)
           router("/");
         }}
       >
@@ -74,8 +75,8 @@ const CreateTask = ({ setModal, modal }) => {
           >
             <div className="w-full flex justify-between">
               <div className="w-[43%] h-[26rem] flex flex-col justify-between">
-                <Field name="name" component={TheInput} label="სათაური" />
-                <Field name="description" component={TheTextarea} label="აღწერა" width="100%" />
+                <Field store name="name" component={TheInput} label="სათაური" />
+                <Field store name="description" component={TheTextarea} label="აღწერა" width="100%" />
                 <div className="flex w-full justify-between mt-28">
                   {priorities?.length > 0 && (
                     <TheSelect
@@ -88,9 +89,11 @@ const CreateTask = ({ setModal, modal }) => {
                       data={priorities}
                       setFieldValue={setFieldValue}
                       defaultValue={priorities[1]}
+                      selectedValue={selectedValue}
                       setSelectedValue={setSelectedValue}
                       errors={errors.priority_id}
                       touched={touched.priority_id}
+                      store
                     />
                   )}
                   {statuses?.length > 0 && (
@@ -104,9 +107,11 @@ const CreateTask = ({ setModal, modal }) => {
                       data={statuses}
                       setFieldValue={setFieldValue}
                       defaultValue={statuses[0]}
+                      selectedValue={selectedValue}
                       setSelectedValue={setSelectedValue}
                       errors={errors.status_id}
                       touched={touched.status_id}
+                      store
                     />
                   )}
                 </div>
@@ -125,9 +130,11 @@ const CreateTask = ({ setModal, modal }) => {
                     employees={employees}
                     filteredEmployees={filteredEmployees}
                     setFilteredEmployees={setFilteredEmployees}
+                    selectedValue={selectedValue}
                     setSelectedValue={setSelectedValue}
                     errors={errors.department_id}
                     touched={touched.department_id}
+                    store
                   />
                   <TheSelect
                     name="employee_id"
@@ -143,9 +150,10 @@ const CreateTask = ({ setModal, modal }) => {
                     setModal={setModal}
                     errors={errors.employee_id}
                     touched={touched.employee_id}
+                    store
                   />
                 </div>
-                <Field name="due_date" component={TheDatePicker} label="დედლაინი" />
+                <Field store name="due_date" component={TheDatePicker} label="დედლაინი" />
               </div>
             </div>
             <div className="mt-20">
