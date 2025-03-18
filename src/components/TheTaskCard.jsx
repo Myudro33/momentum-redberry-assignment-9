@@ -9,7 +9,9 @@ import comment from "../assets/comment-icon.png";
 import { Link } from "react-router-dom";
 
 const TheTaskCard = ({item,index}) => {
-    
+  function description(text, limit = 100) {
+    return text?.length > limit ? text?.slice(0, limit) + "..." : text;
+}
   return (
     <Link to={`/task/${item.id}`} >
     <div
@@ -43,7 +45,7 @@ const TheTaskCard = ({item,index}) => {
       <div className="mx-3 mt-5">
         <h1 className="font-bold">{item.name}</h1>
         <p className="text-[#343A40] h-8 text-xs mt-4 overflow-y-clip">
-          {item.description}
+          {description(item?.description)}
         </p>
       </div>
       <div className="flex justify-between items-center w-full mt-6">
