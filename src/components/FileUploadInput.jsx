@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gallery from "../assets/gallery.png";
 import trashIcon from "../assets/trash-icon.png";
 import checkRed from "../assets/check-red.png";
@@ -33,7 +33,7 @@ const FileUploadInput = ({
   };
 
   const hasError = errors;
-  const borderColor = hasError
+  const borderColor = hasError&&touched
     ? "red"
     : touched
     ? "green"
@@ -83,10 +83,12 @@ const FileUploadInput = ({
           </div>
         )}
       </div>
+      {touched&&
       <p className="text-red-500 flex items-center">
         {errors && <img className="shrink-0 mr-1" src={checkRed} alt="check" />}
         {errors}
       </p>
+      }
     </div>
   );
 };
