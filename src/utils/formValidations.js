@@ -21,14 +21,14 @@ const taskInitialSchema = {
 const taksValidation = Yup.object({
   name: Yup.string()
     .required("სავალდებულო")
-    .min(2, "უნდა იყის 2 სიმბოლოზე მეტი")
-    .max(255, "უნდა იყოს 255 სიმბოლოზე ნაკლები"),
+    .min(2, "მინიმუმ 2 სიმბოლო")
+    .max(255, "მაქსიმუმ 255 სიმბოლო"),
   description: Yup.string()
     .trim()
-    .max(255, "უნდა იყოს 255 სიმბოლოზე ნაკლები")
+    .max(255, "მაქსიმუმ 255 სიმბოლო")
     .test(
       "min-words",
-      "შეიყვანეთ მინიმუმ 4 სიტყვა",
+      "მინიმუმ 4 სიტყვა",
       (value) => !value || value.trim().split(/\s+/).length >= 4
     ),
   priority_id: Yup.string().required("სავალდებულო"),
@@ -44,13 +44,13 @@ const taksValidation = Yup.object({
 const employeeValidation = Yup.object({
   firstName: Yup.string()
     .required("სავალდებულო")
-    .min(2, "უნდა იყის 2 სიმბოლოზე მეტი")
-    .max(255, "უნდა იყოს 255 სიმბოლოზე ნაკლები")
+    .min(2, "მინიმუმ 2 სიმბოლო")
+    .max(255, "მაქსიმუმ 255 სიმბოლო")
     .matches(/^[a-zA-Zა-ჰ]+$/, "მხოლოდ ქართ და ინგლ სიმბოლოები"),
   lastName: Yup.string()
     .required("სავალდებულო")
-    .min(2, "უნდა იყის 2 სიმბოლოზე მეტი")
-    .max(255, "უნდა იყოს 255 სიმბოლოზე ნაკლები")
+    .min(2, "მინიმუმ 2 სიმბოლო")
+    .max(255, "მაქსიმუმ 255 სიმბოლო")
     .matches(/^[a-zA-Zა-ჰ]+$/, "მხოლოდ ქართ და ინგლ სიმბოლოები"),
   avatar: Yup.mixed()
     .required("ფოტო სავალდებულოა")
