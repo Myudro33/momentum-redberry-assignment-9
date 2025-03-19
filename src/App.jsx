@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import ModalWrapper from "./components/modal/ModalWrapper";
 import CreateTask from "./pages/CreateTask";
 import Task from "./pages/Task";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const [modal, setModal] = useState(null);
@@ -39,6 +40,7 @@ const App = () => {
             }
           />
           <Route path="/task/:id" element={<Task />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
