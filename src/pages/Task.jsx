@@ -51,11 +51,13 @@ const Task = () => {
             }}
             className="w-[5.9rem] h-[1.625rem] flex justify-center items-center border p-1 rounded-[.25rem]"
           >
-            <img
-              className="mr-1"
-              src={task?.priority.icon}
-              alt="priority icon"
-            />
+            {task?.priority.icon && (
+              <img
+                className="mr-1"
+                src={task?.priority.icon}
+                alt="priority icon"
+              />
+            )}
             <p className="text-xs">{task?.priority.name}</p>
           </div>
           <p
