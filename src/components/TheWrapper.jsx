@@ -19,7 +19,7 @@ const TheWrapper = ({ tasks }) => {
   }, []);
   return (
     <>
-      <div className="mt-14 w-screen px-[7.5rem] flex justify-between">
+      <div className="mt-4 w-screen px-[7.5rem] flex justify-between">
         {statuses.map((item) => (
           <div
             key={item.id}

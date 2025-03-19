@@ -51,7 +51,7 @@ const FilterChips = () => {
   };
 
   return (
-    <div className="flex items-center flex-wrap mt-2">
+    <div className="flex items-center min-h-14 flex-wrap mt-2">
       {Object.entries(chips).flatMap(([key, values]) =>
         values.map((chip, index) => (
           <div
@@ -66,10 +66,10 @@ const FilterChips = () => {
               onClick={() => handleRemoveChip(key, chip)}
             />
           </div>
-        )),
+        ))
       )}
       {Object.keys(chips).length > 0 && (
-        <p onClick={click} className="ml-2">
+        <p onClick={click} className="ml-2 cursor-pointer">
           გასუფთავება
         </p>
       )}
