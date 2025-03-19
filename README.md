@@ -1,12 +1,41 @@
-# React + Vite
+# Momentum Progress Tracking Software
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Momentum is a Kanban-style progress tracking software that allows you to manage employees and tasks efficiently. It provides filtering options by departments, statuses, and employees to streamline workflow management.
 
-Currently, two official plugins are available:
+## Features
+- 🏢 **Employee** – Create employees.
+- 📌 **Task Management** – Add, update, and track tasks using a Kanban-style interface.
+- 🔍 **Advanced Filtering** – Filter tasks by departments, statuses, and employees for better organization.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Library:** ReactJS 
+- **Styles:** TailwindCSS
+- **Api:** Axios
+- **Form Validations:** Formik + Yup
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+
+### 1. Clone the Repository
+```sh
+git clone https://github.com/Myudro33/momentum-redberry-assignment-9.git
+cd momentum-progress-tracking
+```
+
+### 2. Install Dependencies
+```sh
+npm install  # or yarn install
+```
+
+### 3. Set Up Environment Variables
+Create a `.env` file in the root directory and add:
+```
+VITE_BEARER_TOKEN=your_auth_token
+VITE_API_BASE_URL=api url
+```
+
+### 4. Run the Application
+```sh
+npm run dev  # For development
+npm run build && npm start  # For production
+```
