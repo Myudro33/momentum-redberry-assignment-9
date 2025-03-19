@@ -23,12 +23,12 @@ const FilterByPriorities = ({
       employeesFromQuery,
       selectedPriorities,
       setFilteredData,
-      [...data]
+      [...data],
     );
     setQueryParams(
       setSearchParams,
       { priorities: selectedPriorities },
-      searchParams
+      searchParams,
     );
   };
   return (

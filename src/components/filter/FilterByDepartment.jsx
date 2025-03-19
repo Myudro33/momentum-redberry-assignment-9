@@ -21,12 +21,12 @@ const FilterByDepartment = ({
       employeesFromQuery,
       prioritiesFromQuery,
       setFilteredData,
-      [...data]
+      [...data],
     );
     setQueryParams(
       setSearchParams,
       { departments: selectedDepartments },
-      searchParams
+      searchParams,
     );
   };
   return (

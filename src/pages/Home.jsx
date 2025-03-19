@@ -6,7 +6,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import { applyFilters } from "../services/filterService";
 import FilterChips from "../components/filter/FilterChips";
 
-const Home = ({employees,setEmployees}) => {
+const Home = ({ employees, setEmployees }) => {
   const [tasks, setTasks] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,7 +34,7 @@ const Home = ({employees,setEmployees}) => {
           employeesFromQuery,
           prioritiesFromQuery,
           setFilteredData,
-          [...tasks]
+          [...tasks],
         );
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -57,7 +57,7 @@ const Home = ({employees,setEmployees}) => {
       employeesFromQuery,
       prioritiesFromQuery,
       setFilteredData,
-      [...tasks]
+      [...tasks],
     );
   }, [search]);
   const displayData =

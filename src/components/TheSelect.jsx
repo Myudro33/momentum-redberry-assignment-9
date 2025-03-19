@@ -90,8 +90,8 @@ const TheSelect = ({
   const borderColor = hasError
     ? "red"
     : touched
-    ? "green"
-    : "var(--gray-border)";
+      ? "green"
+      : "var(--gray-border)";
 
   const handleDropdownToggle = () => {
     setDropdown(name);
@@ -153,8 +153,8 @@ const TheSelect = ({
         )}
       </div>
       {hasError && (
-        <p className="text-red-500 flex items-center">
-          <img className="h-5 w-5 shrink-0 mr-1" src={checkRed} alt="check" />
+        <p className="text-red-500 text-xs flex items-center">
+          <img className="shrink-0 mr-1" src={checkRed} alt="check" />
           <ErrorMessage name={name} />
         </p>
       )}

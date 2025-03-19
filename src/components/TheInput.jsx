@@ -8,8 +8,8 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
     errors[field.name] && touched[field.name]
       ? "red"
       : touched[field.name]
-      ? "green"
-      : "var(--gray-border)";
+        ? "green"
+        : "var(--gray-border)";
   useEffect(() => {
     if (props.store) {
       setItem(field.name, field.value);
@@ -27,18 +27,20 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
         type="text"
         style={{ borderColor }}
       />
-        <RenderErrorMessages
-          errorMessage={field.name==='name'?"მინიმუმ 3 სიმბოლო":"მინიმუმ 2 სიმბოლო"}
-          errors={errors}
-          fieldName={field.name}
-          touched={touched}
-        />
-        <RenderErrorMessages
-          errorMessage="მაქსიმუმ 255 სიმბოლო"
-          errors={errors}
-          fieldName={field.name}
-          touched={touched}
-        />
+      <RenderErrorMessages
+        errorMessage={
+          field.name === "name" ? "მინიმუმ 3 სიმბოლო" : "მინიმუმ 2 სიმბოლო"
+        }
+        errors={errors}
+        fieldName={field.name}
+        touched={touched}
+      />
+      <RenderErrorMessages
+        errorMessage="მაქსიმუმ 255 სიმბოლო"
+        errors={errors}
+        fieldName={field.name}
+        touched={touched}
+      />
     </div>
   );
 };

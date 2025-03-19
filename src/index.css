@@ -10,15 +10,15 @@ body {
   font-family: "firaGO";
 }
 :root {
-  --purple: #8338EC;
-  --light-purple: #B588F4;
-  --gray-border:#CED4DA;
-  --light-border: #DEE2E6;
-  --yellow:#F7BC30;
-  --orange:#FB5607;
-  --pink:#FF006E;
-  --blue:#3A86FF;
-  --gray:#474747;
-  --green:#08A508;
-  --red:#FA4D4D;
+  --purple: #8338ec;
+  --light-purple: #b588f4;
+  --gray-border: #ced4da;
+  --light-border: #dee2e6;
+  --yellow: #f7bc30;
+  --orange: #fb5607;
+  --pink: #ff006e;
+  --blue: #3a86ff;
+  --gray: #474747;
+  --green: #08a508;
+  --red: #fa4d4d;
 }

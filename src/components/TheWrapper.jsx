@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from '../services/axiosService'
-import {getStatusBackgroundColor} from "../services/getColors";
+import axios from "../services/axiosService";
+import { getStatusBackgroundColor } from "../services/getColors";
 import TheTaskWrapper from "./TheTaskWrapper";
 
-const TheWrapper = ({tasks}) => {
+const TheWrapper = ({ tasks }) => {
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const statuses = await axios({endpoint:'/statuses',method:"GET"});
+        const statuses = await axios({ endpoint: "/statuses", method: "GET" });
         setStatuses(statuses);
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -30,7 +30,7 @@ const TheWrapper = ({tasks}) => {
           </div>
         ))}
       </div>
-      <TheTaskWrapper tasks={tasks}  />
+      <TheTaskWrapper tasks={tasks} />
     </>
   );
 };

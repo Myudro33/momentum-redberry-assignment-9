@@ -29,7 +29,7 @@ const taksValidation = Yup.object({
     .test(
       "min-words",
       "მინიმუმ 4 სიტყვა",
-      (value) => !value || value.trim().split(/\s+/).length >= 4
+      (value) => !value || value.trim().split(/\s+/).length >= 4,
     ),
   priority_id: Yup.string().required("სავალდებულო"),
   status_id: Yup.string().required("სავალდებულო"),
@@ -57,7 +57,7 @@ const employeeValidation = Yup.object({
     .test(
       "fileSize",
       "ფოტო დიდია (მაქს. 600kb)",
-      (file) => !file || file.size <= FILE_SIZE
+      (file) => !file || file.size <= FILE_SIZE,
     ),
   department_id: Yup.number().required("სავალდებულო"),
 });

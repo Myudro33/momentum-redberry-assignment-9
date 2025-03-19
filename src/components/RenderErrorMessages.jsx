@@ -1,12 +1,12 @@
 import React from "react";
 import getErrorClass from "../services/getErrorClass";
 
-const RenderErrorMessages = ({errorMessage,errors,touched,fieldName}) => {
+const RenderErrorMessages = ({ errorMessage, errors, touched, fieldName }) => {
   const { className, icon } = getErrorClass(
     errorMessage,
     errors,
     touched,
-    fieldName
+    fieldName,
   );
   return (
     <p className={`flex text-xs items-center ${className}`}>

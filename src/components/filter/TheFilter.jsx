@@ -16,7 +16,7 @@ const TheFilter = ({
   selectedEmployees,
   setSelectedEmployees,
   employees,
-  setEmployees
+  setEmployees,
 }) => {
   const [filters, setFilters] = useState({
     department: false,
@@ -35,10 +35,10 @@ const TheFilter = ({
     });
   };
 
-  const toggleSelection = (value, setSelection,employee) => {
-    if(employee){
-      setSelection((prev) => (prev == value ? '' : value));
-      return
+  const toggleSelection = (value, setSelection, employee) => {
+    if (employee) {
+      setSelection((prev) => (prev == value ? "" : value));
+      return;
     }
     setSelection((prev) => {
       const updatedSelection = prev.includes(value)
@@ -130,7 +130,15 @@ const TheFilter = ({
             alt="arrow down"
           />{" "}
         </p>
-        <FilterByEmployee tasks={tasks} toggleSelection={toggleSelection} selectedEmployees={selectedEmployees} setFilteredData={setFilteredData} setSelectedemployees={setSelectedEmployees} show={employee} employees={employees} />
+        <FilterByEmployee
+          tasks={tasks}
+          toggleSelection={toggleSelection}
+          selectedEmployees={selectedEmployees}
+          setFilteredData={setFilteredData}
+          setSelectedemployees={setSelectedEmployees}
+          show={employee}
+          employees={employees}
+        />
       </div>
     </div>
   );

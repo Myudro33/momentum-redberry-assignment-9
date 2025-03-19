@@ -3,7 +3,7 @@ import axios from "../config/axios-config/index";
 const axiosService = async ({ method, endpoint, body = null }) => {
   try {
     const config = {
-      method, 
+      method,
       url: endpoint,
       headers: {
         "Content-Type": "application/json",

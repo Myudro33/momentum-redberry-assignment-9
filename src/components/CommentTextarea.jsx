@@ -19,7 +19,7 @@ const CommentTextarea = ({
         setError("სავალდებულო");
         return;
       }
-      setError('')
+      setError("");
       const newComment = await axios({
         endpoint: `/tasks/${id}/comments`,
         method: "POST",
@@ -33,10 +33,10 @@ const CommentTextarea = ({
             comment.id === newComment.parent_id
               ? {
                   ...comment,
-                  sub_comments: [...(comment.sub_comments || []), newComment]
+                  sub_comments: [...(comment.sub_comments || []), newComment],
                 }
-              : comment
-          )
+              : comment,
+          ),
         );
         setTextarea(false);
       }
@@ -47,7 +47,10 @@ const CommentTextarea = ({
   };
   return (
     <>
-      <div style={style} className={`relative w-full h-32 pb-14 bg-white rounded-md border border-[var(--gray-border)] ${error&&'border border-red-500'} `}>
+      <div
+        style={style}
+        className={`relative w-full h-32 pb-14 bg-white rounded-md border border-[var(--gray-border)] ${error && "border border-red-500"} `}
+      >
         <textarea
           value={value}
           onChange={(e) => setValue(e.target.value)}

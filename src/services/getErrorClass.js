@@ -3,7 +3,10 @@ import checkGreen from "../assets/check-green.png";
 import checkGray from "../assets/check-gray.png";
 
 const getErrorClass = (errorMessage, errors, touched, field) => {
-  if (errors[field] === errorMessage || (errors[field] === "სავალდებულო" && touched[field])) {
+  if (
+    errors[field] === errorMessage ||
+    (errors[field] === "სავალდებულო" && touched[field])
+  ) {
     return { className: "text-[var(--red)]", icon: checkRed };
   } else if (touched[field]) {
     return { className: "text-[var(--green)]", icon: checkGreen };
