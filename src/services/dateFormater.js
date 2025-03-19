@@ -33,8 +33,9 @@ const getDateDay = (dateString) => {
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
-  return `${dayOfWeek} - ${day}/${month}/${year}`;
+  if(dateString){
+    return `${dayOfWeek} - ${day}/${month}/${year}`;
+  }
 };
 
 export  {DateFormatter,getDateDay};
