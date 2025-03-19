@@ -27,7 +27,6 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
         type="text"
         style={{ borderColor }}
       />
-      <div className="text-xs">
         <RenderErrorMessages
           errorMessage={field.name==='name'?"მინიმუმ 3 სიმბოლო":"მინიმუმ 2 სიმბოლო"}
           errors={errors}
@@ -40,7 +39,6 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
           fieldName={field.name}
           touched={touched}
         />
-      </div>
     </div>
   );
 };

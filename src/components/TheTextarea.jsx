@@ -1,4 +1,5 @@
 import { Field, ErrorMessage } from 'formik';
+import RenderErrorMessages from './RenderErrorMessages';
 import React,{useEffect} from 'react';
 import { useLocalStorage } from '../services/useLocalStorage';
 const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
@@ -19,11 +20,12 @@ const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
         className="p-2 h-[8.313rem] resize-none shrink-0 rounded-md border outline-none"
         style={{ borderColor }}
       />
-      <span className="flex items-center h-5 shrink-0">
-        <p className="text-red-500">
-          <ErrorMessage name={field.name} />
-        </p>
-      </span>
+      <RenderErrorMessages
+          errorMessage={"მინიმუმ 4 სიტყვა"}
+          errors={errors}
+          fieldName={field.name}
+          touched={touched}
+        />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const RenderErrorMessages = ({errorMessage,errors,touched,fieldName}) => {
     fieldName
   );
   return (
-    <p className={`flex items-center ${className}`}>
+    <p className={`flex text-xs items-center ${className}`}>
       <img className="mr-1 shrink-0" src={icon} alt="check" /> {errorMessage}
     </p>
   );
