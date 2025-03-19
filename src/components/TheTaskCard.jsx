@@ -17,7 +17,7 @@ const TheTaskCard = ({ item, index }) => {
       <div
         key={item.id}
         style={{ borderColor: getStatusBackgroundColor()[index] }}
-        className="w-full my-6 rounded-[.938rem] h-[13.563rem] p-5 border "
+        className="w-full my-6 rounded-[.938rem] min-h-[13.563rem] p-5 border "
       >
         <div className="flex items-center justify-between">
           <div className="flex">
@@ -48,7 +48,7 @@ const TheTaskCard = ({ item, index }) => {
         </div>
         <div className="mx-3 mt-5">
           <h1 className="font-bold">{item.name}</h1>
-          <p className="text-[#343A40] h-8 text-xs mt-4 overflow-y-clip">
+          <p className="text-[#343A40]  text-xs mt-4 overflow-y-clip">
             {description(item?.description)}
           </p>
         </div>
