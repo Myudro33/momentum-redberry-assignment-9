@@ -3,7 +3,7 @@ import { useLocalStorage } from "../services/useLocalStorage";
 import RenderErrorMessages from "./RenderErrorMessages.jsx";
 
 const TheInput = ({ field, form: { errors, touched }, ...props }) => {
-  const { setItem } = useLocalStorage(field.name);
+  const { setItem } = useLocalStorage();
   const borderColor =
     errors[field.name] && touched[field.name]
       ? "red"
@@ -29,7 +29,7 @@ const TheInput = ({ field, form: { errors, touched }, ...props }) => {
       />
       <div className="text-xs">
         <RenderErrorMessages
-          errorMessage="მინიმუმ 2 სიმბოლო"
+          errorMessage={field.name==='name'?"მინიმუმ 3 სიმბოლო":"მინიმუმ 2 სიმბოლო"}
           errors={errors}
           fieldName={field.name}
           touched={touched}

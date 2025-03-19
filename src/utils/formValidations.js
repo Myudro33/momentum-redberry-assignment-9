@@ -21,7 +21,7 @@ const taskInitialSchema = {
 const taksValidation = Yup.object({
   name: Yup.string()
     .required("სავალდებულო")
-    .min(2, "მინიმუმ 2 სიმბოლო")
+    .min(3, "მინიმუმ 3 სიმბოლო")
     .max(255, "მაქსიმუმ 255 სიმბოლო"),
   description: Yup.string()
     .trim()
