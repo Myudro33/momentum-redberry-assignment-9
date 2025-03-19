@@ -33,6 +33,12 @@ const TheTextarea = ({ field, form: { errors, touched }, ...props }) => {
         fieldName={field.name}
         touched={touched}
       />
+      <RenderErrorMessages
+        errorMessage={"მაქსიმუმ 255 სიმბოლო"}
+        errors={errors}
+        fieldName={field.name}
+        touched={touched}
+      />
     </div>
   );
 };
