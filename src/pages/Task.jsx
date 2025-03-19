@@ -18,16 +18,22 @@ const Task = () => {
   const [statuses, setStatuses] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [comments, setComments] = useState([]);
+  const [dropdown, setDropdown] = useState(null);
+  const handleDropdownToggle = (name) => {
+    setDropdown((prev) => (prev === name ? null : name));
+  };
   useEffect(() => {
     const getData = async () => {
       try {
         const statuses = await axios({ endpoint: "/statuses", method: "GET" });
         const task = await axios({ endpoint: `/tasks/${id}`, method: "GET" });
         const comments = await axios({
-          endpoint:`/tasks/${task?.id}/comments`,method:"GET"});
+          endpoint: `/tasks/${task?.id}/comments`,
+          method: "GET",
+        });
         setStatuses(statuses);
         setTask(task);
-        setComments(comments)
+        setComments(comments);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -45,7 +51,11 @@ const Task = () => {
             }}
             className="w-[5.9rem] h-[1.625rem] flex justify-center items-center border p-1 rounded-[.25rem]"
           >
-            <img className="mr-1" src={task?.priority.icon} alt="priority icon" />
+            <img
+              className="mr-1"
+              src={task?.priority.icon}
+              alt="priority icon"
+            />
             <p className="text-xs">{task?.priority.name}</p>
           </div>
           <p
@@ -90,6 +100,8 @@ const Task = () => {
                     setFieldValue={setFieldValue}
                     selectedValue={selectedValue}
                     setSelectedValue={setSelectedValue}
+                    dropdown={dropdown}
+                    setDropdown={handleDropdownToggle}
                   />
                 </Form>
               )}
@@ -104,7 +116,7 @@ const Task = () => {
               avatar={task?.employee.avatar}
               name={task?.employee.name}
               surname={task?.employee.surname}
-              page={'task'}
+              page={"task"}
               department={task?.department.name}
             />
           </div>
@@ -120,11 +132,31 @@ const Task = () => {
         </div>
       </div>
       <div className="w-[55%]  p-10 rounded-md bg-[#F8F3FEA6]">
-        <CommentTextarea parent setComments={setComments} comments={comments} id={task?.id} />
-        <h1 className="mt-6">კომენტარები <span className="rounded-3xl py-0.5 px-3 text-white bg-[color:var(--purple)]" >{comments?.length}</span></h1>
+        <CommentTextarea
+          parent
+          setComments={setComments}
+          comments={comments}
+          id={task?.id}
+        />
+        <h1 className="mt-6">
+          კომენტარები{" "}
+          <span className="rounded-3xl py-0.5 px-3 text-white bg-[color:var(--purple)]">
+            {comments?.length}
+          </span>
+        </h1>
         <div>
-          {comments?.map((item)=>(
-            <TheComment setComments={setComments} comments={comments} id={task?.id} parent_id={item.id} author_avatar={item.author_avatar} author_nickname={item.author_nickname} text={item.text} key={item.id} subcoments={item.sub_comments} />
+          {comments?.map((item) => (
+            <TheComment
+              setComments={setComments}
+              comments={comments}
+              id={task?.id}
+              parent_id={item.id}
+              author_avatar={item.author_avatar}
+              author_nickname={item.author_nickname}
+              text={item.text}
+              key={item.id}
+              subcoments={item.sub_comments}
+            />
           ))}
         </div>
       </div>

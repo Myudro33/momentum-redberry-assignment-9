@@ -38,6 +38,9 @@ const TheSelect = ({
         endpoint: `/tasks/${id}`,
         body: { status_id: item.id },
       });
+      setDropdown(null);
+      setSelected(item);
+      return;
     }
 
     setSelected(item);
@@ -97,11 +100,11 @@ const TheSelect = ({
     <div style={{ width }} className="h-25 flex flex-col">
       <label className="font-semibold text-sm">{label}</label>
       <div
-        
         className="relative inline-block h-11 w-full p-2 shrink-0 rounded-md border"
         style={{ borderColor }}
       >
-        <button onClick={handleDropdownToggle}
+        <button
+          onClick={handleDropdownToggle}
           type="button"
           className="flex items-center text-sm h-8 w-full relative"
         >
