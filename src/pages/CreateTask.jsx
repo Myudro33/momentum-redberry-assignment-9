@@ -65,7 +65,7 @@ const CreateTask = () => {
                   label="აღწერა"
                   width="100%"
                 />
-                <div className="flex w-full justify-between mt-28">
+                <div className="flex w-full justify-between mt-36 ">
                   {priorities?.length > 0 && (
                     <TheSelect
                       name="priority_id"
@@ -108,7 +108,7 @@ const CreateTask = () => {
                   )}
                 </div>
               </div>
-              <div className="w-[43%] h-[25.2rem] flex flex-col justify-between">
+              <div className="w-[43%] h-[27.4rem] flex flex-col justify-between">
                 <div className="h-[12.5rem] flex flex-col justify-between">
                   <TheSelect
                     name="department_id"
