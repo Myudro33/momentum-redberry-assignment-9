@@ -15,7 +15,7 @@ const CreateTask = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdown, setDropdown] = useState(null);
   const [disableSelect, setDisableSelect] = useState(true);
-  const { priorities, statuses, departments } = useMyContext();
+  const { priorities, statuses, departments, tasks, setTasks } = useMyContext();
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
@@ -36,8 +36,9 @@ const CreateTask = () => {
         validationSchema={taksValidation}
         validateOnChange={true}
         validateOnBlur={true}
-        onSubmit={(values) => {
-          addTask(values);
+        onSubmit={async (values) => {
+          const newTask = await addTask(values);
+          setTasks([...tasks, newTask]);
           router("/");
         }}
       >

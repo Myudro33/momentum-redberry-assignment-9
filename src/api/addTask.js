@@ -11,7 +11,7 @@ const addTask = async (data) => {
       body: data,
     });
     localStorage.clear();
-    return response.data;
+    return response;
   } catch (error) {
     alert("Error fetching data:", error);
   }
