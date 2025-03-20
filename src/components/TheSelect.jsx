@@ -27,6 +27,7 @@ const TheSelect = ({
   dropdown,
   setDropdown,
   modal,
+  disabled,
 }) => {
   const [selected, setSelected] = useState();
   const { setItem, getItem } = useLocalStorage(name);
@@ -106,14 +107,20 @@ const TheSelect = ({
     ? "red"
     : touched
       ? "green"
-      : "var(--gray-border)";
+      : name === "employee_id" && !disabled
+        ? "var(--light-border) "
+        : "var(--gray-border)";
 
   const handleDropdownToggle = () => {
     setDropdown(name);
   };
   return (
     <div style={{ width }} className="h-25 flex flex-col">
-      <label className="font-semibold text-sm">{label}</label>
+      <label
+        className={`font-semibold text-sm  ${name === "employee_id" && !disabled && "text-[var(--light-border)]"}`}
+      >
+        {label}
+      </label>
       <div
         className="relative inline-block h-11 w-full p-2 shrink-0 rounded-md border"
         style={{ borderColor }}
@@ -133,12 +140,20 @@ const TheSelect = ({
             className={`absolute right-0 ${
               !dropdown === name && "rotate-180"
             } transition-all `}
-            src={dropdown === name ? solidArrow : arrowDown}
+            src={
+              dropdown === name
+                ? name === "employee_id" && !disabled
+                  ? arrowDown
+                  : solidArrow
+                : arrowDown
+            }
             alt="arrow"
           />
         </button>
         {dropdown === name && (
-          <ul className="w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-20 p-2">
+          <ul
+            className={`w-full left-0 mt-5 top-6 absolute list-none bg-white border border-[var(--purple)] rounded-md z-20 p-2 ${name === "employee_id" && !disabled && "hidden"} `}
+          >
             {name === "employee_id" && (
               <button
                 className="text-[color:var(--purple)] z-0 cursor-pointer flex items-center w-full p-2"

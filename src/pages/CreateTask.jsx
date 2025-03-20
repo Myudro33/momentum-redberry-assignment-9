@@ -17,6 +17,7 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdown, setDropdown] = useState(null);
+  const [disableSelect, setDisableSelect] = useState(true);
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
@@ -46,6 +47,17 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
     };
     fetchEmployees();
   }, []);
+
+  useEffect(() => {
+    if (!selectedValue && !localStorage.getItem("department_id")) {
+      setDisableSelect(false);
+      console.log("false");
+    } else {
+      setDisableSelect(true);
+      console.log("true");
+    }
+    console.log(selectedValue);
+  }, [selectedValue]);
 
   return (
     <div className="px-[7.5rem] mt-5">
@@ -166,6 +178,7 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
                     store
                     dropdown={dropdown}
                     setDropdown={handleDropdownToggle}
+                    disabled={disableSelect}
                   />
                 </div>
                 <Field

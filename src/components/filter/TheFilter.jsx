@@ -70,7 +70,7 @@ const TheFilter = ({
   }, []);
 
   return (
-    <div className="w-[43rem] px-6 h-[2.75rem] mt-8 flex justify-between rounded-[.625rem] border border-[color:var(--light-border)]">
+    <div className="w-[43rem] px-6 h-[2.75rem] mt-8 flex justify-between rounded-[.625rem] border border-[color:var(--gray-border)]">
       <div className="flex items-center relative">
         <p
           style={{ color: department && "var(--purple)" }}
