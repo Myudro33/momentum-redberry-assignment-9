@@ -11,23 +11,25 @@ export const MyProvider = ({ children }) => {
   const [departments, setDepartments] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const fetchEmployeeData = async () => {
+    return await axios({ method: "GET", endpoint: "/employees" });
+  };
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [tasks, priorities, statuses, departments, employees] =
+      const [tasks, employees, priorities, statuses, departments] =
         await Promise.all([
           axios({ method: "GET", endpoint: "/tasks" }),
+          axios({ method: "GET", endpoint: "/employees" }),
           axios({ method: "GET", endpoint: "/priorities" }),
           axios({ method: "GET", endpoint: "/statuses" }),
           axios({ method: "GET", endpoint: "/departments" }),
-          axios({ method: "GET", endpoint: "/employees" }),
         ]);
       setTasks(tasks);
+      setEmployees(employees);
       setPriorities(priorities);
       setStatuses(statuses);
       setDepartments(departments);
-      setEmployees(employees);
       setLoading(false);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -51,6 +53,7 @@ export const MyProvider = ({ children }) => {
         setTasks,
         loading,
         setLoading,
+        fetchEmployeeData,
       }}
     >
       {children}

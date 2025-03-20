@@ -29,7 +29,8 @@ const TheSelect = ({
 }) => {
   const [selected, setSelected] = useState();
   const { setItem, getItem } = useLocalStorage(name);
-  const { modal, setModal, employees, setTasks } = useMyContext();
+  const { modal, setModal, employees, setTasks, fetchEmployeeData } =
+    useMyContext();
 
   const handleChange = async (item) => {
     if (name === "status") {
@@ -77,17 +78,18 @@ const TheSelect = ({
   }, [defaultValue, name, setFieldValue]);
 
   useEffect(() => {
+    const fetchEmployees = async () => {
+      const empl = await fetchEmployeeData();
+      const filter = empl.filter(
+        (empl) => empl.department.id === getItem("department_id")?.id
+      );
+      setFilteredEmployees(filter);
+    };
     if (
       name === "department_id" &&
       getItem("department_id")?.id &&
       modal === null
     ) {
-      const fetchEmployees = async () => {
-        const filter = employees.filter(
-          (empl) => empl.department.id === getItem("department_id")?.id
-        );
-        setFilteredEmployees(filter);
-      };
       fetchEmployees();
     }
   }, [modal]);
