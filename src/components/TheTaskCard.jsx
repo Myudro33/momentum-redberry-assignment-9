@@ -17,7 +17,7 @@ const TheTaskCard = ({ item, index }) => {
       <div
         key={item.id}
         style={{ borderColor: getStatusBackgroundColor()[index] }}
-        className="w-full my-6 rounded-[.938rem] min-h-[13.563rem] p-5 border "
+        className="w-full my-6 rounded-[.938rem] min-h-[13.563rem] p-5 flex flex-col justify-between border "
       >
         <div className="flex items-center justify-between">
           <div className="flex">
