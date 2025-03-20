@@ -18,11 +18,18 @@ const ModalWrapper = ({ modal, setModal, employees, setEmployees }) => {
       setModal(null);
     }
   };
+
   return (
     <div
       onClick={handleBackdropClick}
-      className="w-full top-0 z-60 h-screen bg-[#0D0F1026] fixed flex justify-center items-center"
-      style={{ position: "fixed", top: 0, left: 0 }}
+      className="w-full top-0 z-60 h-screen fixed flex justify-center items-center"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        backgroundColor: "rgba(13, 15, 16, 0.15)",
+        backdropFilter: "blur(4px)",
+      }}
     >
       {modal && (
         <EmployeeModal
