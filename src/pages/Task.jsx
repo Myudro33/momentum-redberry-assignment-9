@@ -19,12 +19,14 @@ const Task = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [comments, setComments] = useState([]);
   const [dropdown, setDropdown] = useState(null);
+  const [loading, setLoading] = useState(false);
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
   useEffect(() => {
     const getData = async () => {
       try {
+        setLoading(true);
         const statuses = await axios({ endpoint: "/statuses", method: "GET" });
         const task = await axios({ endpoint: `/tasks/${id}`, method: "GET" });
         const comments = await axios({
@@ -34,13 +36,18 @@ const Task = () => {
         setStatuses(statuses);
         setTask(task);
         setComments(comments);
+        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
     };
     getData();
   }, []);
-  return (
+  return loading ? (
+    <div className="w-screen h-40 flex items-center justify-center">
+      <h1 className="text-3xl"> Loading...</h1>
+    </div>
+  ) : (
     <div className="px-[7.5rem] mt-10 flex justify-between">
       <div className="w-[45%]">
         <div className="flex">
