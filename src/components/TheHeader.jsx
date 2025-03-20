@@ -15,7 +15,6 @@ const TheHeader = ({ setModal }) => {
       <div className="grid gap-5 grid-cols-2">
         <TheButton
           onClick={() => {
-            localStorage.clear();
             setModal(true);
           }}
           text="თანამშრომლის შექმნა"
