@@ -12,14 +12,14 @@ import { getDateDay } from "../services/dateFormater";
 import { Formik, Form } from "formik";
 import CommentTextarea from "../components/CommentTextarea";
 import TheComment from "../components/TheComment";
+import { useMyContext } from "../context";
 const Task = () => {
   const { id } = useParams();
   const [task, setTask] = useState();
-  const [statuses, setStatuses] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [comments, setComments] = useState([]);
   const [dropdown, setDropdown] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, setLoading, statuses } = useMyContext();
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
@@ -83,15 +83,7 @@ const Task = () => {
               <img className="w-5 h-5 mr-2" src={statusIcon} alt="status" />
               სტატუსი
             </p>
-            <Formik
-              onSubmit={(values) => {
-                axios({
-                  method: "PUT",
-                  endpoint: `/tasks/${task?.id}`,
-                  body: values,
-                });
-              }}
-            >
+            <Formik>
               {({ setFieldValue, handleChange, handleSubmit }) => (
                 <Form
                   className="h-8 mt-6 flex items-center"

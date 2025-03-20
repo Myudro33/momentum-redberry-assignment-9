@@ -50,6 +50,7 @@ export const MyProvider = ({ children }) => {
         tasks,
         setTasks,
         loading,
+        setLoading,
       }}
     >
       {children}

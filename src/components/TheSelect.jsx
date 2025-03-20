@@ -29,15 +29,18 @@ const TheSelect = ({
 }) => {
   const [selected, setSelected] = useState();
   const { setItem, getItem } = useLocalStorage(name);
-  const { modal, setModal, employees } = useMyContext();
+  const { modal, setModal, employees, setTasks } = useMyContext();
 
-  const handleChange = (item) => {
+  const handleChange = async (item) => {
     if (name === "status") {
-      axios({
+      const res = await axios({
         method: "PUT",
         endpoint: `/tasks/${id}`,
         body: { status_id: item.id },
       });
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === id ? res : task))
+      );
       setDropdown(null);
       setSelected(item);
       return;
