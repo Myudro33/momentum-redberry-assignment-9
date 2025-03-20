@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import arrow from "../../assets/arrow-down.png";
 import arrowDown from "../../assets/arrow-down-solid.png";
-import axios from "../../services/axiosService";
 import FilterByDepartment from "./FilterByDepartment";
 import FilterByPriorities from "./FilterByPriorities";
 import FilterByEmployee from "./FilterByEmployee";
+import { useMyContext } from "../../context";
 
 const TheFilter = ({
-  tasks,
   setFilteredData,
   selectedDepartments,
   setSelectedDepartments,
@@ -15,17 +14,13 @@ const TheFilter = ({
   setSelectedPriorities,
   selectedEmployees,
   setSelectedEmployees,
-  employees,
-  setEmployees,
 }) => {
   const [filters, setFilters] = useState({
     department: false,
     prioritie: false,
     employee: false,
   });
-  const [departments, setDepartments] = useState([]);
-  const [priorities, setPriorities] = useState([]);
-
+  const { departments, priorities, employees, tasks } = useMyContext();
   const { department, prioritie, employee } = filters;
   const toggleFilter = (filter) => {
     setFilters({
@@ -47,27 +42,6 @@ const TheFilter = ({
       return updatedSelection;
     });
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const departments = await axios({
-        endpoint: "/departments",
-        method: "GET",
-      });
-      const priorities = await axios({
-        endpoint: "/priorities",
-        method: "GET",
-      });
-      const employees = await axios({
-        endpoint: "/employees",
-        method: "GET",
-      });
-      setPriorities(priorities);
-      setDepartments(departments);
-      setEmployees(employees);
-    };
-    fetchData();
-  }, []);
 
   return (
     <div className="w-[43rem] px-6 h-[2.75rem] mt-8 flex justify-between rounded-[.625rem] border border-[color:var(--gray-border)]">

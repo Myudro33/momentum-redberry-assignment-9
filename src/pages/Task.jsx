@@ -27,13 +27,11 @@ const Task = () => {
     const getData = async () => {
       try {
         setLoading(true);
-        const statuses = await axios({ endpoint: "/statuses", method: "GET" });
         const task = await axios({ endpoint: `/tasks/${id}`, method: "GET" });
         const comments = await axios({
           endpoint: `/tasks/${task?.id}/comments`,
           method: "GET",
         });
-        setStatuses(statuses);
         setTask(task);
         setComments(comments);
         setLoading(false);

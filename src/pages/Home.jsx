@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import TheFilter from "../components/filter/TheFilter";
 import TheWrapper from "../components/TheWrapper";
-import axios from "../services/axiosService";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { applyFilters } from "../services/filterService";
 import FilterChips from "../components/filter/FilterChips";
+import { useMyContext } from "../context";
 
-const Home = ({ employees, setEmployees }) => {
-  const [tasks, setTasks] = useState([]);
+const Home = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedPriorities, setSelectedPriorities] = useState([]);
   const [selectedEmployees, setSelectedEmployees] = useState(null);
   const { search } = useLocation();
+  const { tasks } = useMyContext();
   useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
       try {
-        const tasks = await axios({ endpoint: "/tasks", method: "GET" });
-        setTasks(tasks);
         setFilteredData(tasks);
         const departmentsFromQuery =
           searchParams.get("departments")?.split(",") || [];
@@ -34,7 +32,7 @@ const Home = ({ employees, setEmployees }) => {
           employeesFromQuery,
           prioritiesFromQuery,
           setFilteredData,
-          [...tasks],
+          [...tasks]
         );
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -57,7 +55,7 @@ const Home = ({ employees, setEmployees }) => {
       employeesFromQuery,
       prioritiesFromQuery,
       setFilteredData,
-      [...tasks],
+      [...tasks]
     );
   }, [search]);
   const displayData =
@@ -81,9 +79,6 @@ const Home = ({ employees, setEmployees }) => {
           setSelectedEmployees={setSelectedEmployees}
           filteredData={filteredData}
           setFilteredData={setFilteredData}
-          tasks={tasks}
-          employees={employees}
-          setEmployees={setEmployees}
         />
         <FilterChips />
       </div>

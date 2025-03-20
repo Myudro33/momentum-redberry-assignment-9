@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import EmployeeModal from "./EmployeeModal";
+import { useMyContext } from "../../context";
 
-const ModalWrapper = ({ modal, setModal, employees, setEmployees }) => {
+const ModalWrapper = () => {
+  const { modal, setModal, employees, setEmployees } = useMyContext();
+
   useEffect(() => {
     if (modal) {
       document.body.style.overflow = "hidden";
@@ -19,6 +22,8 @@ const ModalWrapper = ({ modal, setModal, employees, setEmployees }) => {
     }
   };
 
+  if (modal === null) return null;
+
   return (
     <div
       onClick={handleBackdropClick}
@@ -31,6 +36,8 @@ const ModalWrapper = ({ modal, setModal, employees, setEmployees }) => {
         backdropFilter: "blur(4px)",
       }}
     >
+      <p>Modal Content: {modal}</p>
+      <button onClick={() => setModal(null)}>Close Modal</button>
       {modal && (
         <EmployeeModal
           employees={employees}

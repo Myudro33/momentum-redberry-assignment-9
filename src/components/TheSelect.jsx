@@ -7,6 +7,7 @@ import checkRed from "../assets/check-red.png";
 import solidArrow from "../assets/arrow-down-solid.png";
 import arrowDown from "../assets/arrow-down.png";
 import { useLocalStorage } from "../services/useLocalStorage";
+import { useMyContext } from "../context";
 
 const TheSelect = ({
   name,
@@ -17,20 +18,18 @@ const TheSelect = ({
   setFieldValue,
   setSelectedValue,
   setFilteredEmployees,
-  employees,
   selectedValue,
-  setModal,
   id,
   errors,
   touched,
   store,
   dropdown,
   setDropdown,
-  modal,
   disabled,
 }) => {
   const [selected, setSelected] = useState();
   const { setItem, getItem } = useLocalStorage(name);
+  const { modal, setModal, employees } = useMyContext();
 
   const handleChange = (item) => {
     if (name === "status") {
@@ -81,8 +80,7 @@ const TheSelect = ({
       modal === null
     ) {
       const fetchEmployees = async () => {
-        const employee = await axios({ method: "GET", endpoint: "/employees" });
-        const filter = employee.filter(
+        const filter = employees.filter(
           (empl) => empl.department.id === getItem("department_id")?.id
         );
         setFilteredEmployees(filter);

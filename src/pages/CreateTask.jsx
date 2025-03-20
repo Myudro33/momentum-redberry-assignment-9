@@ -6,57 +6,26 @@ import TheTextarea from "../components/TheTextarea";
 import TheSelect from "../components/TheSelect";
 import TheDatePicker from "../components/TheDatePicker";
 import TheButton from "../components/TheButton";
-import axios from "../services/axiosService";
 import { useNavigate } from "react-router-dom";
 import addTask from "../api/addTask";
+import { useMyContext } from "../context";
 
-const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
-  const [priorities, setPriorities] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-  const [departments, setDepartments] = useState([]);
+const CreateTask = () => {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdown, setDropdown] = useState(null);
   const [disableSelect, setDisableSelect] = useState(true);
+  const { priorities, statuses, departments } = useMyContext();
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
   const router = useNavigate();
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [priorities, statuses, departments] = await Promise.all([
-          axios({ method: "GET", endpoint: "/priorities" }),
-          axios({ method: "GET", endpoint: "/statuses" }),
-          axios({ method: "GET", endpoint: "/departments" }),
-        ]);
-        setPriorities(priorities);
-        setStatuses(statuses);
-        setDepartments(departments);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      const employee = await axios({ method: "GET", endpoint: "/employees" });
-      setEmployees(employee);
-    };
-    fetchEmployees();
-  }, []);
-
-  useEffect(() => {
     if (!selectedValue && !localStorage.getItem("department_id")) {
       setDisableSelect(false);
-      console.log("false");
     } else {
       setDisableSelect(true);
-      console.log("true");
     }
-    console.log(selectedValue);
   }, [selectedValue]);
 
   return (
@@ -149,7 +118,6 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
                     width="100%"
                     data={departments}
                     setFieldValue={setFieldValue}
-                    employees={employees}
                     filteredEmployees={filteredEmployees}
                     setFilteredEmployees={setFilteredEmployees}
                     selectedValue={selectedValue}
@@ -159,7 +127,6 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
                     store
                     dropdown={dropdown}
                     setDropdown={handleDropdownToggle}
-                    modal={modal}
                   />
                   <TheSelect
                     name="employee_id"
@@ -172,7 +139,6 @@ const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
                     data={filteredEmployees}
                     setFieldValue={setFieldValue}
                     setSelectedValue={setSelectedValue}
-                    setModal={setModal}
                     errors={errors.employee_id}
                     touched={touched.employee_id}
                     store

@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "../services/axiosService";
+import React, { useEffect } from "react";
 import { getStatusBackgroundColor } from "../services/getColors";
 import TheTaskWrapper from "./TheTaskWrapper";
+import { useMyContext } from "../context";
 
 const TheWrapper = ({ tasks }) => {
-  const [statuses, setStatuses] = useState([]);
+  const { statuses } = useMyContext();
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const statuses = await axios({ endpoint: "/statuses", method: "GET" });
-        setStatuses(statuses);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-    getData();
-  }, []);
   return (
     <>
       <div className="mt-4 w-screen px-[7.5rem] flex justify-between">
-        {statuses.map((item) => (
+        {statuses?.map((item) => (
           <div
             key={item.id}
             style={{ backgroundColor: getStatusBackgroundColor()[item.id - 1] }}

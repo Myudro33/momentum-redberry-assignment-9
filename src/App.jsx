@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TheHeader from "./components/TheHeader";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -6,39 +6,33 @@ import ModalWrapper from "./components/modal/ModalWrapper";
 import CreateTask from "./pages/CreateTask";
 import Task from "./pages/Task";
 import NotFound from "./pages/NotFound";
+import { useMyContext } from "./context";
 
 const App = () => {
-  const [modal, setModal] = useState(null);
-  const [employees, setEmployees] = useState([]);
+  const { fetchData, loading } = useMyContext();
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="overflow-x-hidden">
       <BrowserRouter>
-        <TheHeader setModal={setModal} />
+        <TheHeader />
         <div className="w-screen h-24"></div>
-        {modal !== null && (
-          <ModalWrapper
-            setEmployees={setEmployees}
-            employees={employees}
-            modal={modal}
-            setModal={setModal}
-          />
-        )}
+        <ModalWrapper />
         <Routes>
           <Route
             path="/"
-            element={<Home employees={employees} setEmployees={setEmployees} />}
-          />
-          <Route
-            path="/task"
             element={
-              <CreateTask
-                employees={employees}
-                setEmployees={setEmployees}
-                modal={modal}
-                setModal={setModal}
-              />
+              loading ? (
+                <div className="w-full h-80 flex items-center justify-center text-3xl">
+                  loading...
+                </div>
+              ) : (
+                <Home />
+              )
             }
           />
+          <Route path="/task" element={<CreateTask />} />
           <Route path="/task/:id" element={<Task />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

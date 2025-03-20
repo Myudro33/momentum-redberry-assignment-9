@@ -11,29 +11,17 @@ import {
   employeeInitialSchema,
 } from "../../utils/formValidations";
 import addEmployee from "../../api/addEmployee";
+import { useMyContext } from "../../context";
 
-const EmployeeModal = ({ setModal, employees, setEmployees }) => {
+const EmployeeModal = () => {
   const [image, setImage] = useState(null);
-  const [departments, setDepartments] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdown, setDropdown] = useState(null);
+  const { setModal, employees, setEmployees, departments } = useMyContext();
+
   const handleDropdownToggle = (name) => {
     setDropdown((prev) => (prev === name ? null : name));
   };
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const departments = await axios({
-          endpoint: "/departments",
-          method: "GET",
-        });
-        setDepartments(departments);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-    getData();
-  }, []);
   return (
     <Formik
       initialValues={employeeInitialSchema}
