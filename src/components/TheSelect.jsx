@@ -7,7 +7,6 @@ import checkRed from "../assets/check-red.png";
 import solidArrow from "../assets/arrow-down-solid.png";
 import arrowDown from "../assets/arrow-down.png";
 import { useLocalStorage } from "../services/useLocalStorage";
-import { useNavigate } from "react-router-dom";
 
 const TheSelect = ({
   name,
@@ -27,6 +26,7 @@ const TheSelect = ({
   store,
   dropdown,
   setDropdown,
+  modal,
 }) => {
   const [selected, setSelected] = useState();
   const { setItem, getItem } = useLocalStorage(name);
@@ -73,6 +73,22 @@ const TheSelect = ({
     }
   }, [defaultValue, name, setFieldValue]);
 
+  useEffect(() => {
+    if (
+      name === "department_id" &&
+      getItem("department_id")?.id &&
+      modal === null
+    ) {
+      const fetchEmployees = async () => {
+        const employee = await axios({ method: "GET", endpoint: "/employees" });
+        const filter = employee.filter(
+          (empl) => empl.department.id === getItem("department_id")?.id
+        );
+        setFilteredEmployees(filter);
+      };
+      fetchEmployees();
+    }
+  }, [modal]);
   const renderEmployeeCard = (item) => (
     <EmployeeCard
       avatar={item?.avatar}
@@ -81,9 +97,8 @@ const TheSelect = ({
       page={name}
     />
   );
-  const router = useNavigate();
   const showModal = () => {
-    router("/");
+    setDropdown(null);
     setModal(true);
   };
   const hasError = errors && touched;

@@ -10,11 +10,10 @@ import axios from "../services/axiosService";
 import { useNavigate } from "react-router-dom";
 import addTask from "../api/addTask";
 
-const CreateTask = ({ setModal, modal }) => {
+const CreateTask = ({ setModal, modal, employees, setEmployees }) => {
   const [priorities, setPriorities] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdown, setDropdown] = useState(null);
@@ -25,17 +24,14 @@ const CreateTask = ({ setModal, modal }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [priorities, statuses, departments, employees] =
-          await Promise.all([
-            axios({ method: "GET", endpoint: "/priorities" }),
-            axios({ method: "GET", endpoint: "/statuses" }),
-            axios({ method: "GET", endpoint: "/departments" }),
-            axios({ method: "GET", endpoint: "/employees" }),
-          ]);
+        const [priorities, statuses, departments] = await Promise.all([
+          axios({ method: "GET", endpoint: "/priorities" }),
+          axios({ method: "GET", endpoint: "/statuses" }),
+          axios({ method: "GET", endpoint: "/departments" }),
+        ]);
         setPriorities(priorities);
         setStatuses(statuses);
         setDepartments(departments);
-        setEmployees(employees);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -49,7 +45,7 @@ const CreateTask = ({ setModal, modal }) => {
       setEmployees(employee);
     };
     fetchEmployees();
-  }, [modal]);
+  }, []);
 
   return (
     <div className="px-[7.5rem] mt-5">
@@ -151,6 +147,7 @@ const CreateTask = ({ setModal, modal }) => {
                     store
                     dropdown={dropdown}
                     setDropdown={handleDropdownToggle}
+                    modal={modal}
                   />
                   <TheSelect
                     name="employee_id"

@@ -17,7 +17,6 @@ const TheHeader = ({ setModal }) => {
           onClick={() => {
             localStorage.clear();
             setModal(true);
-            navigate("/");
           }}
           text="თანამშრომლის შექმნა"
         />
